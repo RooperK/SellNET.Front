@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~bootswatch/dist/yeti/variables";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootswatch/dist/yeti/bootswatch";
+html,
+body{
+  height: 100%;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+.content {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+.footer {
+  flex: 0 0 auto;
+}
+.no-border {
+  border: 0 white !important;
+}
+
+.whitecolor {
+  color: white;
+}
+

@@ -1,0 +1,39 @@
+.bg-header-image {
+  background-image: url("/assets/header-bg.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  min-height: 100px;
+  background-position: bottom;
+  padding: 13px;
+}
+
+.search-box {
+  padding: 2px 2px 2px 10px;
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.log-box {
+  padding: 2px 2px 2px 2px;
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+}
+
+.category-dropdown {
+  border-right-color: #9b51e0;
+  border-right-width: 1px;
+}
+
+.submit-search-btn {
+  background: #F2C94C;
+  border-radius: 20px;
+}
+
+.reg-btn {
+  color: white;
+  background: #F2C94C;
+  border-radius: 20px 20px 20px 0;
+}

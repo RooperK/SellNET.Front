@@ -1,0 +1,56 @@
+<nav class="bg-header-image mb-3">
+  <div class="navbar">
+    <a class="navbar-brand" routerLink="">
+      <img src="assets/logo.svg" alt="">
+    </a>
+
+    <form class="form-inline search-box shadow-sm" [formGroup]="searchForm">
+      <div class="category">
+        <div class="dropdown show category-dropdown">
+          <a class="btn no-border dropdown-toggle" href="#" role="button" id="categoryMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Категория
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="categoryMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+      </div>
+
+      <input formControlName="search" class="form-control no-border" size="45" type="search" placeholder="Введите запрос..." aria-label="Search">
+
+      <div class="category">
+        <div class="dropdown show category-dropdown">
+          <a class="btn no-border dropdown-toggle" href="#" role="button" id="regionMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Регион
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="regionMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn submit-search-btn shadow-sm" type="submit">
+        <i class="fas fa-arrow-right whitecolor"></i>
+      </button>
+
+    </form>
+
+    <div class="log-box shadow-sm" *ngIf="!authService.isLogged()">
+      <a [routerLink]="'/login'"><button class="btn">Вход</button></a>
+      <a [routerLink]="'/signup'"><button class="btn reg-btn shadow-sm">Регистрация</button></a>
+    </div>
+
+    <div class="log-box shadow-sm" *ngIf="authService.isLogged()">
+      <button class="btn" (click)="authService.logout()">Выход</button>
+    </div>
+
+
+  </div>
+
+</nav>
