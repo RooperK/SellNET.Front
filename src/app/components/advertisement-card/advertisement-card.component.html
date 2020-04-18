@@ -1,23 +1,22 @@
 <a [routerLink]="['/advert', advertisement.id]">
   <div class="card mb-3 shadow text-body">
-    <div class="">
-      <img class="image mb-2" src="{{imgUrl}}" alt="" (error)="onPictureError()">
+    <div class="image round">
+      <img class="image mb-2" src="{{getPictureSrc()}}" alt="" (error)="onErrorPicture()">
       <div class="mx-3 my-2">
         <h5 class="card-title">{{advertisement.title}}</h5>
         <table class="no-border table_ad">
           <tr>
             <td class="pr-1"><i class="fas fa-map-marker-alt main-color"></i></td>
-            <td class="px-1">{{advertisement.address}}</td>
+            <td class="px-1 sub-text">{{advertisement.location.city}}</td>
           </tr>
           <tr>
             <td class="pr-1"><i class="fas fa-calendar-day main-color"></i></td>
-            <td class="px-1">{{advertisement.creationTime}}</td>
+            <td class="px-1 sub-text">{{getDate(advertisement.creationTime)}}</td>
           </tr>
         </table>
-        <h5  class="mt-2 py-1">{{advertisement.price}} ₽</h5>
+        <h5 class="mt-2 py-1">{{advertisement.price}} ₽</h5>
       </div>
 
-      <!-- <a [routerLink]="['/advertisements', advertisement.id]" class="btn btn-primary">Перейти</a> -->
     </div>
   </div>
 </a>

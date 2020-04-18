@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {User} from './models/user/user';
+import {UserModel} from './models/user/user.model';
 import {Router} from '@angular/router';
 import {AuthenticationService} from './services/authentication-service';
 import {Role} from './models/role/role';
@@ -11,7 +11,7 @@ import {Role} from './models/role/role';
 })
 export class AppComponent {
   title = 'SellNET';
-  currentUser: User;
+  currentUser: UserModel;
 
   constructor(
     private router: Router,

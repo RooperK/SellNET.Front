@@ -8,31 +8,17 @@
       <div class="category">
         <div class="dropdown show category-dropdown">
           <a class="btn no-border dropdown-toggle" href="#" role="button" id="categoryMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Категория
+            {{this.getCurrentCategoryName()}}
           </a>
 
-          <div class="dropdown-menu" aria-labelledby="categoryMenuLink">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+          <div class="dropdown-menu round" aria-labelledby="categoryMenuLink">
+            <a class="dropdown-item color-di" (click)="setCurrentCategory(category)" *ngFor="let category of categories">{{category.name}}</a>
           </div>
         </div>
       </div>
 
-      <input formControlName="search" class="form-control no-border" size="45" type="search" placeholder="Введите запрос..." aria-label="Search">
-
-      <div class="category">
-        <div class="dropdown show category-dropdown">
-          <a class="btn no-border dropdown-toggle" href="#" role="button" id="regionMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Регион
-          </a>
-
-          <div class="dropdown-menu" aria-labelledby="regionMenuLink">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </div>
+      <div class="">
+        <input formControlName="search" size="60" class="form-control no-border search-input" type="search" placeholder="Введите запрос..." aria-label="Search">
       </div>
 
       <button class="btn submit-search-btn shadow-sm" type="submit">
@@ -47,7 +33,20 @@
     </div>
 
     <div class="log-box shadow-sm" *ngIf="authService.isLogged()">
-      <button class="btn" (click)="authService.logout()">Выход</button>
+      <div class="profile-box">
+        <div class="dropdown show round">
+          <a class="btn no-border dropdown-toggle" href="#" role="button" id="profileBox" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="{{getAvatar()}}" class="avatar mr-2" />
+            {{authService.currentUserValue.firstName}}
+          </a>
+
+          <div class="dropdown-menu dropdown-menu-right round" aria-labelledby="profileBox">
+            <a class="dropdown-item color-di" [routerLink]="'/profile'">Мой профиль</a>
+            <a class="dropdown-item color-di" [routerLink]="'/additem'">Добавить объявление</a>
+            <a class="dropdown-item color-di" (click)="authService.logout()">Выйти</a>
+          </div>
+        </div>
+      </div>
     </div>
 
 

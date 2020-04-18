@@ -1,10 +1,14 @@
-<div class="container">
+<div class="container" *ngIf="!loading">
   <div class="row">
     <div class="col-3" *ngFor="let advertisement of advertisements">
       <app-advertisement-card [advertisement]="advertisement"></app-advertisement-card>
     </div>
   </div>
-
 </div>
 
+<div class="loading-container" *ngIf="loading">
+  <div class="loading">
+    <span class="spinner-border spinner-border-sm mr-1 spinner"></span>
+  </div>
+</div>
 

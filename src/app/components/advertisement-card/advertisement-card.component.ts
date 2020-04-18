@@ -1,7 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {IAdvertisementModel} from '../../models/advertisement/advertisement-model';
-import {IImageModel} from '../../models/image-model';
+import {AdvertisementModel} from '../../models/advertisement/advertisement-model';
+import {ImageModel} from '../../models/image/image.model';
 import {AdvertisementService} from '../../services/advertisement-service';
+import {AdvertisementPreviewModel} from "../../models/advertisement/advertisement-preview.model";
+import {PictureService} from "../../services/picture.service";
+import {InfoService} from "../../services/info.service";
 
 @Component({
   selector: 'app-advertisement-card',
@@ -9,23 +12,25 @@ import {AdvertisementService} from '../../services/advertisement-service';
   styleUrls: ['./advertisement-card.component.scss']
 })
 export class AdvertisementCardComponent implements OnInit {
-  @Input() advertisement: IAdvertisementModel;
-  imgUrl: string;
+  @Input() advertisement: AdvertisementPreviewModel;
 
-  constructor(private advertisementService: AdvertisementService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.advertisementService.getImageByAdId(this.advertisement.id).subscribe(response => {
-      if ((response as IImageModel[])[0] != null) {
-        this.imgUrl = (response as IImageModel[])[0].url;
-      } else {
-        this.onPictureError();
-      }
-    });
+    if (!this.advertisement.image) {
+      this.onErrorPicture();
+    }
   }
 
-  onPictureError() {
-    this.imgUrl = 'https://via.placeholder.com/300';
+  onErrorPicture() {
+    this.advertisement.image = PictureService.placeholder500;
   }
 
+  getPictureSrc() {
+    return PictureService.getPictureSrc(this.advertisement.image.imageUrl);
+  }
+
+  getDate(creationTime: string) {
+    return InfoService.parseDate(creationTime);
+  }
 }

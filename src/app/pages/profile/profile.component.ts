@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../../services/authentication-service';
 import {UserService} from '../../services/user-service';
-import {User} from '../../models/user/user';
+import {UserModel} from '../../models/user/user.model';
 import {first} from 'rxjs/operators';
 
 @Component({
@@ -11,8 +11,8 @@ import {first} from 'rxjs/operators';
 })
 export class ProfileComponent implements OnInit {
   loading = false;
-  currentUser: User;
-  userFromApi: User;
+  currentUser: UserModel;
+  userFromApi: UserModel;
 
   constructor(
     private userService: UserService,

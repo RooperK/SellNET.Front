@@ -1,22 +1,44 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import {Observable, throwError, TimeoutError} from 'rxjs';
+import {catchError, timeout} from 'rxjs/operators';
 import {AuthenticationService} from '../services/authentication-service';
+import {Router} from '@angular/router';
 
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(private router: Router, private authenticationService: AuthenticationService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(request).pipe(catchError(err => {
-      if ([401, 403].indexOf(err.status) !== -1) {
-        this.authenticationService.logout();
-        location.reload(true);
+    return next.handle(request).pipe(timeout(5000), catchError(err => {
+      let error = '';
+      console.log(err);
+
+      if (err instanceof TimeoutError) {
+        this.router.navigate(['/error', 'tech']);
+      } else {
+        if ([401, 403].indexOf(err.status) !== -1) {
+          this.authenticationService.logout();
+          location.reload(true);
+        }
+        error = err.error[0].message || err.statusText;
+
+        if ([400].indexOf(err.status) !== -1) {
+          error = err.error[0].errorMessage;
+        }
+        console.log(err);
+        if (err.status === 500) {
+          error = err.error;
+        }
+
+        if (err.status === 404) {
+          this.router.navigate(['/error', '404']);
+        }
       }
 
-      const error = err.error.message || err.statusText;
+
+
       return throwError(error);
     }));
   }

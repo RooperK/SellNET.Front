@@ -16,7 +16,30 @@ import { AdminComponent } from './pages/admin/admin.component';
 import {JwtInterceptor} from './_helpers/jwt.interceptor';
 import {ErrorInterceptor} from './_helpers/error.interceptor';
 import {ReactiveFormsModule} from '@angular/forms';
-import {fakeBackendProvider} from './_helpers/fake-backend';
+import { SearchComponent } from './pages/search/search.component';
+import { SearchCardComponent } from './components/search-card/search-card.component';
+import { EdititemComponent } from './pages/edititem/edititem.component';
+import { AdditemComponent } from './pages/additem/additem.component';
+import { CategoryChooserComponent } from './components/category-chooser/category-chooser.component';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+import { RecaptchaModule, RecaptchaFormsModule} from 'ng-recaptcha';
+import { CloudinaryModule } from '@cloudinary/angular-5.x';
+import * as  Cloudinary from 'cloudinary-core';
+import { NgxMaskModule } from 'ngx-mask';
+import { CategoryFilterComponent } from './components/category-filter/category-filter.component';
+import { DashboardFilteredComponent } from './pages/dashboard-filtered/dashboard-filtered.component';
+import {MatTreeModule} from '@angular/material/tree';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {AutosizeModule} from 'ngx-autosize';
+import {FileUploadModule} from 'ng2-file-upload';
+import {NgxDadataModule} from "@kolkov/ngx-dadata";
+import { ErrorComponent } from './components/error/error.component';
+import {NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModalBackdrop} from '@ng-bootstrap/ng-bootstrap/modal/modal-backdrop';
+import { CommentCardComponent } from './components/comment-card/comment-card.component';
+import { CommentBoxComponent } from './components/comment-box/comment-box.component';
 
 @NgModule({
   declarations: [
@@ -29,19 +52,42 @@ import {fakeBackendProvider} from './_helpers/fake-backend';
     FooterComponent,
     HeaderComponent,
     ProfileComponent,
-    AdminComponent
+    AdminComponent,
+    SearchComponent,
+    SearchCardComponent,
+    EdititemComponent,
+    AdditemComponent,
+    CategoryChooserComponent,
+    ImageUploadComponent,
+    CategoryFilterComponent,
+    DashboardFilteredComponent,
+    ErrorComponent,
+    CommentCardComponent,
+    CommentBoxComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        RecaptchaModule,
+        RecaptchaFormsModule,
+        CloudinaryModule.forRoot(Cloudinary, {cloud_name: 'dennztta6', upload_preset: 'ml_default'}),
+        NgxMaskModule.forRoot(),
+        BrowserAnimationsModule,
+        MatTreeModule,
+        MatIconModule,
+        MatButtonModule,
+        AutosizeModule,
+        FileUploadModule,
+        NgxDadataModule,
+        NgbCarouselModule,
+    ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    fakeBackendProvider
+    // fakeBackendProvider
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

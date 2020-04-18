@@ -1,20 +1,79 @@
-<div class="form-login">
-  <h1 class="h3 mb-3 font-weight-normal">Регистрация</h1>
-  <div class="form-group">
-    <label for="inputEmail">Email</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="Email или Логин" required autofocus>
+<script src='https://raw.githubusercontent.com/candreoliveira/ngMask/master/dist/ngMask.min.js'></script>
+<div class="">
+  <h2 class="header m-3">Регистрация</h2>
+  <div class="text-center m-3">
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <input id="name" type="text" placeholder="Ваше имя" formControlName="name" class="form-control round input shadow-sm" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+          <div *ngIf="f.name.errors.required">Введите ваше имя</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input id="surname" type="text" placeholder="Ваша фамилия" formControlName="surname" class="form-control round input shadow-sm" [ngClass]="{ 'is-invalid': submitted && f.surname.errors }" />
+        <div *ngIf="submitted && f.surname.errors" class="invalid-feedback">
+          <div *ngIf="f.surname.errors.required">Введите вашу фамилию</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input id="email" type="email" placeholder="Электронная почта" formControlName="email" class="form-control round input shadow-sm" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+          <div *ngIf="f.email.errors.required">Введите электронную почту</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input id="phone" type="text" mask="(000) 000-00-00" prefix="+7 " [showMaskTyped]="true" placeHolderCharacter="_"  placeholder="Номер телефона" formControlName="phone" class="form-control round input shadow-sm" />
+
+      </div>
+      <div class="form-group">
+        <input id="password" type="password" placeholder="Пароль" formControlName="password" class="form-control round input shadow-sm" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Введите пароль</div>
+        </div>
+        <small id="passwordHelpBlock" class="form-text text-muted">
+          Пароль должен содержать 6-20 символов
+        </small>
+      </div>
+      <div class="form-group">
+        <input id="confirmPassword" type="password" placeholder="Повторите пароль" formControlName="confirmPassword" class="form-control round input shadow-sm" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+        <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+          <div *ngIf="f.confirmPassword.errors.required">Подтвердите пароль</div>
+        </div>
+      </div>
+      <div class="m-2">
+        <re-captcha (resolved)="resolved($event)"
+                    formControlName="recaptchaReactive"
+                    siteKey="{{getSiteKey()}}">
+        </re-captcha>
+      </div>
+      <button [disabled]="loading" class="btn round btn-login shadow-sm">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        Регистрация
+      </button>
+      <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+
+
+    </form>
+    <div class="text-center m-3">
+      <hr class="m-3 line" />
+      войти через социальные сети
+    </div>
+
+    <div >
+      <button class="vk btn-circle no-border shadow-sm">
+        <i class="fab fa-vk"></i>
+      </button>
+      <button class="g btn-circle no-border shadow-sm">
+        <i class="fab fa-google"></i>
+      </button>
+      <button class="fb btn-circle no-border shadow-sm">
+        <i class="fab fa-facebook-f"></i>
+      </button>
+
+    </div>
+
+
   </div>
-  <div class="form-group">
-    <label for="inputPassword">Пароль</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Пароль" required
-           aria-describedby="passwordHelpBlock">
-    <small id="passwordHelpBlock" class="form-text text-muted">
-      Пароль должен содержать 6-20 символов
-    </small>
-  </div>
-  <div class="form-group">
-    <label for="inputPasswordRepeat">Повторите пароль</label>
-    <input type="password" id="inputPasswordRepeat" class="form-control mb-3" placeholder="Повторите пароль" required>
-  </div>
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Регистрация</button>
 </div>
+
+

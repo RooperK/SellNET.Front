@@ -1,3 +1,57 @@
-<div class="container">
-  {{advertisement.title}}
+<div class="container pb-3">
+  <div class="card p-2 round shadow">
+
+    <div class="row">
+      <div class="col-6">
+        <ngb-carousel #carousel class="carousel-container no-focus">
+          <ng-template ngbSlide *ngFor="let image of advertisement.images" class="image">
+            <div class="picsum-img-wrapper image">
+              <img class="image" [src]="getPictureSrc(image)" alt="">
+            </div>
+          </ng-template>
+        </ngb-carousel>
+      </div>
+
+      <div class="col-6 px-5 item-container">
+        <div class="pr-2 py-2">
+          <div class="row justify-content-between flex-row">
+            <h3>{{advertisement.title}}</h3>
+            <div class="row flex-row icon-container">
+              <h3 class="mx-3" style="color: #F2C94C">{{advertisement.price}} ₽</h3>
+              <i class="fas fa-pencil-alt icon-edit mx-1 shadow-sm" *ngIf="isCreator()"></i>
+
+              <a (click)="deleteItem()"><i class="fas fa-trash icon-delete mx-1 shadow-sm" *ngIf="isCreator()"></i></a>
+
+            </div>
+          </div>
+
+          <div class="row justify-content-between my-2">
+            <table class="no-border">
+              <tr>
+                <td class="pr-1"><i class="fas fa-map-marker-alt main-color"></i></td>
+                <td class="px-1 sub-text">{{getAddress()}}</td>
+              </tr>
+              <tr>
+                <td class="pr-1"><i class="fas fa-calendar-day main-color"></i></td>
+                <td class="px-1 sub-text">{{getDate(advertisement.creationTime)}}</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="row my-4">
+            <p class="main-text">{{advertisement.text}}</p>
+          </div>
+
+
+        </div>
+
+        <div class="text-center w-100 row align-items-center">
+          <div class="py-2 px-4 row bg-white round shadow user-card">
+            <img src="{{getAvatar()}}" class="avatar" />
+            <h3 class="ml-4">{{advertisement.user.firstName}}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

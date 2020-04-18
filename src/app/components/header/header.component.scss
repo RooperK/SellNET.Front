@@ -1,10 +1,23 @@
 .bg-header-image {
   background-image: url("/assets/header-bg.svg");
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
   min-height: 100px;
   background-position: bottom;
   padding: 13px;
+}
+
+.search-input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input-container {
+  width: 100%;
+}
+
+.avatar {
+  height: 2.25rem;
 }
 
 .search-box {
@@ -12,7 +25,8 @@
   background-color: white;
   border-radius: 20px;
   display: flex;
-  justify-content: space-around;
+  max-width: 750px;
+  justify-content: normal;
 }
 
 .log-box {
@@ -27,6 +41,16 @@
   border-right-width: 1px;
 }
 
+.user-dropdown {
+  float: right;
+}
+
+.color-di:hover {
+  background-color: #9b51e0;
+  background-image: none;
+  border-radius: 10px;
+}
+
 .submit-search-btn {
   background: #F2C94C;
   border-radius: 20px;
@@ -36,4 +60,8 @@
   color: white;
   background: #F2C94C;
   border-radius: 20px 20px 20px 0;
+}
+
+@media only screen and (max-width: 1200px) {
+
 }

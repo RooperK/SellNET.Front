@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {IAdvertisementModel} from '../../models/advertisement/advertisement-model';
+import {AdvertisementModel} from '../../models/advertisement/advertisement-model';
 import {AdvertisementService} from '../../services/advertisement-service';
+import {CategoryService} from '../../services/category-service';
+import {AdvertisementPreviewModel} from "../../models/advertisement/advertisement-preview.model";
 
 @Component({
   selector: 'app-dashboard',
@@ -8,14 +10,16 @@ import {AdvertisementService} from '../../services/advertisement-service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  advertisements: IAdvertisementModel[];
+  advertisements: AdvertisementPreviewModel[];
+  loading = true;
 
-  constructor(private advertisementService: AdvertisementService) { }
+  constructor(private advertisementService: AdvertisementService, private categoryService: CategoryService) { }
 
   ngOnInit() {
-    this.advertisementService.getAdvertisementList().subscribe(response => {
+    this.categoryService.setCurrentCategory(null);
+    this.advertisementService.getNewestAdvertisements(1).subscribe(response => {
       this.advertisements = response;
-      this.advertisementService.fakeAdvertisementList = response;
+      this.loading = false;
     });
   }
 
