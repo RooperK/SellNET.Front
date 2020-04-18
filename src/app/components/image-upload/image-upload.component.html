@@ -1,0 +1,31 @@
+<div class="my-4 row">
+
+  <div class="m-2" *ngFor="let image of images">
+    <div class="drop-card shadow-sm round">
+      <cl-image class="m-1 round" public-id="{{image.imageUrl}}">
+        <cl-transformation width="190" height="190" crop="fill">
+        </cl-transformation>
+      </cl-image>
+    </div>
+  </div>
+
+
+  <div id="direct_upload" class="drop-card shadow-sm round m-2" ng2FileDrop [uploader]="uploader" (fileOver)="fileOverBase($event)" [ngClass]="{'nv-file-over': hasBaseDropZoneOver}">
+
+    <div class="icon">
+      <i class="fas fa-cloud-upload-alt"></i>
+      <div class="file" *ngFor="let response of responses; let i = index">
+
+        <div class="status">
+          {{response.progress}}%
+        </div>
+
+      </div>
+    </div>
+
+
+
+  </div>
+
+</div>
+
