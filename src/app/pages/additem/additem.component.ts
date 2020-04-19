@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import {AdvertisementModel} from '../../models/advertisement/advertisement-model';
-import {CategoryModel} from '../../models/category/category.model';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {CategoryLevelModel} from '../../models/category/category-level.model';
-import {CategoryChooserComponent} from '../../components/category-chooser/category-chooser.component';
 import {AdvertisementService} from '../../services/advertisement-service';
 import {first} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ImageModel} from '../../models/image/image.model';
-import {DadataAddress, DadataConfig, DadataSuggestion, DadataType} from "@kolkov/ngx-dadata";
-import {LocationModel} from "../../models/location/location.model";
+import {DadataAddress, DadataConfig, DadataSuggestion, DadataType, NgxDadataComponent} from '@kolkov/ngx-dadata';
+import {LocationModel} from '../../models/location/location.model';
+import {AdvertisementModel} from "../../models/advertisement/advertisement-model";
+import {AuthenticationService} from "../../services/authentication-service";
+import {InfoService} from "../../services/info.service";
+import {Observable} from "rxjs";
+import {ImageUploadComponent} from "../../components/image-upload/image-upload.component";
 
 @Component({
   selector: 'app-additem',
@@ -19,6 +20,7 @@ import {LocationModel} from "../../models/location/location.model";
 export class AdditemComponent implements OnInit {
 
   isEditing: boolean;
+  advertisement: AdvertisementModel;
   images: ImageModel[];
   currentLocation: LocationModel;
   currentCategoryId: number;
@@ -26,6 +28,7 @@ export class AdditemComponent implements OnInit {
   submitted = false;
   error = '';
   addressSelected = false;
+  @ViewChild('imageUploadComponent', {static: true}) imageUploadComponent: ImageUploadComponent;
 
   addItemFormGroup: FormGroup;
 
@@ -37,15 +40,35 @@ export class AdditemComponent implements OnInit {
   onAddressSelected(event: DadataSuggestion) {
     this.addressSelected = true;
     const addressData = event.data as DadataAddress;
-    console.log(addressData);
-    this.currentLocation = {country: addressData.country, region: addressData.region_with_type, city: addressData.city, street: addressData.street};
+    this.currentLocation = {country: addressData.country, region: addressData.region_with_type, city: addressData.city, street: addressData.street_with_type};
   }
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private advertisementService: AdvertisementService) { }
+
+  constructor(private router: Router, private authService: AuthenticationService,
+              private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder,
+              private advertisementService: AdvertisementService) { }
 
   ngOnInit() {
-    console.log(this.activatedRoute.pathFromRoot);
-    this.currentLocation = {country: '', region: '', city: '', street: ''};
+    this.isEditing = this.activatedRoute.snapshot.data.isEditing;
+    if (this.isEditing) {
+      this.loading = true;
+      this.advertisementService.getAdvertisementById(this.activatedRoute.snapshot.params.id).subscribe(resp => {
+        this.advertisement = resp as AdvertisementModel;
+        if (this.advertisement.user.id !== this.authService.currentUserValue.id) {
+          this.router.navigate(['/']);
+        }
+        this.f.item_title.setValue(this.advertisement.title);
+        this.f.item_body.setValue(this.advertisement.text);
+        this.f.item_price.setValue(this.advertisement.price);
+        this.f.item_address.setValue(InfoService.parseAddress(this.advertisement.location));
+        this.currentLocation = this.advertisement.location;
+        this.addressSelected = true;
+        this.imageUploadComponent.initImages();
+        this.loading = false;
+      });
+    } else {
+      this.currentLocation = {country: '', region: '', city: '', street: ''};
+    }
     this.addItemFormGroup = this.formBuilder.group({
       item_title: ['', Validators.required],
       item_body: ['', Validators.required],
@@ -84,17 +107,28 @@ export class AdditemComponent implements OnInit {
 
     this.loading = true;
 
-    console.log('post');
+    if (this.isEditing) {
+      this.advertisementService.editAdvertisement(this.f.item_title.value, this.f.item_body.value, this.currentLocation, this.currentCategoryId, this.images, Number.parseInt(this.f.item_price.value, 10), 1).pipe(first())
+        .subscribe(
+          data => {
+            this.router.navigate(['/']);
+          },
+          error => {
+            this.error = error;
+            this.loading = false;
+          });
+    } else {
+      this.advertisementService.postAdvertisement(this.f.item_title.value, this.f.item_body.value, this.currentLocation, this.currentCategoryId, this.images, Number.parseInt(this.f.item_price.value, 10), 1).pipe(first())
+        .subscribe(
+          data => {
+            this.router.navigate(['/']);
+          },
+          error => {
+            this.error = error;
+            this.loading = false;
+          });
+    }
 
-    this.advertisementService.postAdvertisement(this.f.item_title.value, this.f.item_body.value, this.currentLocation, this.currentCategoryId, this.images, Number.parseInt(this.f.item_price.value, 10), 1).pipe(first())
-      .subscribe(
-        data => {
-          this.router.navigate(['/']);
-        },
-        error => {
-          this.error = error;
-          this.loading = false;
-        });
   }
 
 }

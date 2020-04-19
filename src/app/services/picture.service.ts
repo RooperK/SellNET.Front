@@ -21,9 +21,11 @@ export class PictureService {
 
   static getAvatarSrc(avatar: ImageModel): string {
     if (!avatar) {
-      return this.userPlaceholder.imageUrl;
-    } else {
+      avatar = this.userPlaceholder;
+    }
+    if (avatar.imageUrl.startsWith('SellNET')) {
       return `https://res.cloudinary.com/dennztta6/image/upload/w_100,h_100,c_fill,r_max/q_90/v1587033211/${avatar.imageUrl}`;
     }
+    return avatar.imageUrl;
   }
 }

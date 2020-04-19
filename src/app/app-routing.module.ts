@@ -5,13 +5,13 @@ import {AdvertisementComponent} from './pages/advertisement/advertisement.compon
 import {LoginComponent} from './pages/login/login.component';
 import {SignupComponent} from './pages/signup/signup.component';
 import {ProfileComponent} from './pages/profile/profile.component';
-import {AdminComponent} from './pages/admin/admin.component';
 import {AuthGuard} from './_helpers/auth.guard';
 import {Role} from './models/role/role';
 import {AdditemComponent} from "./pages/additem/additem.component";
 import {EdititemComponent} from "./pages/edititem/edititem.component";
 import {DashboardFilteredComponent} from "./pages/dashboard-filtered/dashboard-filtered.component";
 import {ErrorComponent} from "./components/error/error.component";
+import {SearchComponent} from "./pages/search/search.component";
 
 
 const routes: Routes = [
@@ -45,28 +45,24 @@ const routes: Routes = [
     component: ProfileComponent
   },
   {
-    path: 'admin',
-    component: AdminComponent,
-    canActivate: [AuthGuard],
-    data: {roles: [Role.Admin]}
-  },
-  {
     path: 'additem',
     component: AdditemComponent,
     canActivate: [AuthGuard],
-    data: {roles: ['RoleUser', 'RoleAdmin']}
+    data: {roles: ['RoleUser', 'RoleAdmin'], isEditing: false}
   },
   {
     path: 'edititem/:id',
     component: AdditemComponent,
     canActivate: [AuthGuard],
-    data: {roles: ['RoleUser', 'RoleAdmin']}
+    data: {roles: ['RoleUser', 'RoleAdmin'], isEditing: true},
   },
   {
     path: 'edititem',
-    component: EdititemComponent,
-    canActivate: [AuthGuard],
-    data: {roles: ['RoleUser', 'RoleAdmin']}
+    redirectTo: ''
+  },
+  {
+    path: 'search/:id/:searchText',
+    component: DashboardFilteredComponent,
   },
   {
     path: '**',

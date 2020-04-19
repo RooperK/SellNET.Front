@@ -3,6 +3,9 @@ import {AuthenticationService} from '../../services/authentication-service';
 import {UserService} from '../../services/user-service';
 import {UserModel} from '../../models/user/user.model';
 import {first} from 'rxjs/operators';
+import {PictureService} from "../../services/picture.service";
+import {AdvertisementPreviewModel} from "../../models/advertisement/advertisement-preview.model";
+import {AdvertisementService} from "../../services/advertisement-service";
 
 @Component({
   selector: 'app-profile',
@@ -12,20 +15,19 @@ import {first} from 'rxjs/operators';
 export class ProfileComponent implements OnInit {
   loading = false;
   currentUser: UserModel;
-  userFromApi: UserModel;
+  advertisements: AdvertisementPreviewModel[];
 
-  constructor(
-    private userService: UserService,
-    private authenticationService: AuthenticationService
-  ) {
-    this.currentUser = this.authenticationService.currentUserValue;
+  constructor(private authService: AuthenticationService, private advertisementService: AdvertisementService) {
+    this.currentUser = this.authService.currentUserValue;
   }
 
   ngOnInit() {
-    this.loading = true;
-    this.userService.getById(this.currentUser.id).pipe(first()).subscribe(user => {
-      this.loading = false;
-      this.userFromApi = user;
+    this.advertisementService.getNewestAdvertisements(1).subscribe(response => {
+      this.advertisements = response;
     });
+  }
+
+  getAvatar() {
+    return PictureService.getAvatarSrc(this.currentUser.avatar);
   }
 }

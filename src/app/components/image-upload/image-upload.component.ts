@@ -30,9 +30,15 @@ export class ImageUploadComponent implements OnInit {
     this.images = [];
   }
 
-  ngOnInit(): void {
+  initImages(): void {
+    if (this.addItemComponent.advertisement.images) {
+      this.images = (this.addItemComponent.advertisement.images);
+    }
     this.addItemComponent.images = this.images;
 
+  }
+
+  ngOnInit(): void {
     const uploaderOptions: FileUploaderOptions = {
       url: `https://api.cloudinary.com/v1_1/${this.cloudinary.config().cloud_name}/upload`,
       autoUpload: true,

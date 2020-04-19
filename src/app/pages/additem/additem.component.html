@@ -1,7 +1,8 @@
 <form [formGroup]="addItemFormGroup" (ngSubmit)="onSubmit()">
 
-  <div class="container">
-    <h3 class="my-3">Добавление объявления</h3>
+  <div class="container mb-3">
+    <h3 class="my-3" *ngIf="!isEditing">Добавление объявления</h3>
+    <h3 class="my-3" *ngIf="isEditing">Изменение объявления</h3>
 
     <app-category-chooser id="category-chooser" [addItemComponent]="this"></app-category-chooser>
     <div *ngIf="submitted && f.item_category.errors" class="invalid-feedback">
@@ -20,7 +21,7 @@
       <div *ngIf="f.item_body.errors.required">Введите описание объявления</div>
     </div>
 
-    <ngx-dadata class="search my-2" placeholder="Введите адрес" formControlName="item_address" [config]="config" (selected)="onAddressSelected($event)"></ngx-dadata>
+    <ngx-dadata id="item_address" class="search my-2" placeholder="Введите адрес" formControlName="item_address" [config]="config" (selected)="onAddressSelected($event)"></ngx-dadata>
     <div *ngIf="submitted && f.item_address.errors" class="invalid-feedback">
       <div *ngIf="f.item_address.errors.required">Введите адрес</div>
     </div>
@@ -34,7 +35,7 @@
 
     <h3 class="my-3">Загрузите фотографии</h3>
 
-    <app-image-upload [addItemComponent]="this"></app-image-upload>
+    <app-image-upload #imageUploadComponent [addItemComponent]="this"></app-image-upload>
 
     <button [disabled]="loading" class="btn round btn-add shadow-sm">
       <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>

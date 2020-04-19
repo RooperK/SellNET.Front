@@ -1,8 +1,7 @@
-import {ImageModel} from '../image/image.model';
+import {UserModel} from '../user/user.model';
 
 export class CommentModel {
-  authorName: string;
-  authorAvatar?: ImageModel;
+  author: UserModel;
   text: string;
   creationTime: string;
   parentCommentId?: number;

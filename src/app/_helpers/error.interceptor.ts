@@ -4,6 +4,7 @@ import {Observable, throwError, TimeoutError} from 'rxjs';
 import {catchError, timeout} from 'rxjs/operators';
 import {AuthenticationService} from '../services/authentication-service';
 import {Router} from '@angular/router';
+import {environment} from "../../environments/environment";
 
 
 @Injectable()
@@ -11,11 +12,10 @@ export class ErrorInterceptor implements HttpInterceptor {
   constructor(private router: Router, private authenticationService: AuthenticationService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(request).pipe(timeout(5000), catchError(err => {
+    return next.handle(request).pipe(timeout(10000), catchError(err => {
       let error = '';
-      console.log(err);
 
-      if (err instanceof TimeoutError) {
+      if (environment.interceptTimeoutErr && err instanceof TimeoutError) {
         this.router.navigate(['/error', 'tech']);
       } else {
         if ([401, 403].indexOf(err.status) !== -1) {

@@ -8,7 +8,7 @@
 }
 
 .search-input {
-  width: 100%;
+  width: calc(100% - 15rem );
   box-sizing: border-box;
 }
 
@@ -48,6 +48,7 @@
 .color-di:hover {
   background-color: #9b51e0;
   background-image: none;
+  color: white;
   border-radius: 10px;
 }
 

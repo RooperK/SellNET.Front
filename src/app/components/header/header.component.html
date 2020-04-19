@@ -4,7 +4,7 @@
       <img src="assets/logo.svg" alt="">
     </a>
 
-    <form class="form-inline search-box shadow-sm" [formGroup]="searchForm">
+    <form class="row search-box shadow-sm justify-content-center w-75" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
       <div class="category">
         <div class="dropdown show category-dropdown">
           <a class="btn no-border dropdown-toggle" href="#" role="button" id="categoryMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -17,9 +17,7 @@
         </div>
       </div>
 
-      <div class="">
-        <input formControlName="search" size="60" class="form-control no-border search-input" type="search" placeholder="Введите запрос..." aria-label="Search">
-      </div>
+      <input formControlName="search_text" class="form-control no-border search-input" type="search" placeholder="Введите запрос..." aria-label="Search">
 
       <button class="btn submit-search-btn shadow-sm" type="submit">
         <i class="fas fa-arrow-right whitecolor"></i>
@@ -37,7 +35,9 @@
         <div class="dropdown show round">
           <a class="btn no-border dropdown-toggle" href="#" role="button" id="profileBox" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img src="{{getAvatar()}}" class="avatar mr-2" />
-            {{authService.currentUserValue.firstName}}
+            <span class="my-auto">
+              {{authService.currentUserValue.firstName}}
+            </span>
           </a>
 
           <div class="dropdown-menu dropdown-menu-right round" aria-labelledby="profileBox">

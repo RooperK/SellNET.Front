@@ -1,1 +1,17 @@
-<p>comment-box works!</p>
+<div class="card round shadow p-3 my-2" *ngIf="authService.isLogged()">
+  <form [formGroup]="commentFormGroup" (ngSubmit)="onSubmit()">
+    <div class="row mx-4 justify-content-center">
+      <img class="avatar" src="{{getAvatar()}}" />
+
+      <textarea formControlName="item_text" class="form-control round shadow no-border text-comment-area mx-3" rows="2" placeholder="Введите комментарий" autosize></textarea>
+
+
+      <button class="round btn-send shadow no-border" [disabled]="loading" >
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        <i *ngIf="!loading" class="fas fa-paper-plane icon-send"></i>
+      </button>
+    </div>
+  </form>
+</div>
+
+<app-comment-card *ngFor="let comment of comments" [comment]="comment"></app-comment-card>

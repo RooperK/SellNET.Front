@@ -17,6 +17,7 @@ export class SignupComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   error = '';
+  captcha: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,9 +35,9 @@ export class SignupComponent implements OnInit {
       name: ['', Validators.required],
       surname: ['', Validators.required],
       email: ['', Validators.required],
-      phone: ['', Validators.required],
+      phone: [''],
       confirmPassword: ['', Validators.required],
-      recaptchaReactive: [''],
+      recaptchaReactive: ['', Validators.required],
       password: ['', Validators.required]
     });
 
@@ -51,10 +52,14 @@ export class SignupComponent implements OnInit {
     if (this.signupForm.invalid) {
       return;
     }
+    if (!this.captcha) {
+      this.error = 'Введите reCaptcha';
+      return;
+    }
 
     this.loading = true;
     this.authenticationService.signup(this.f.email.value, this.f.name.value, this.f.surname.value,
-                                      this.f.phone.value, this.f.password.value, this.f.confirmPassword.value)
+                                      this.f.phone.value, this.f.password.value, this.f.confirmPassword.value, this.captcha)
       .pipe(first())
       .subscribe(
         data => {
@@ -68,7 +73,7 @@ export class SignupComponent implements OnInit {
 
   resolved(captchaResponse: string) {
     console.log(`Resolved response token: ${captchaResponse}`);
-
+    this.captcha = captchaResponse;
   }
 
   getSiteKey() {

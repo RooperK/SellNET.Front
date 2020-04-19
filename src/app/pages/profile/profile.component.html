@@ -1,2 +1,30 @@
-<div class="card mt-4">
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <div class="round shadow bg-white p-3">
+        <img class="m-2" src="{{getAvatar()}}"/>
+        <span class="m-2 name">
+          Фамилия
+        </span>
+        <span class="m-2 name">
+          Имечко
+        </span>
+        <div class="shadow-sm round button-profile button-edit-profile my-2">
+          <div class="row mx-auto ">
+            <i class="fas fa-pencil-alt icon-edit mx-1 my-auto"></i>
+            <h5 class="ml-2 my-auto">Изменить</h5>
+          </div>
+        </div>
+        <div class="shadow-sm round button-profile button-delete-profile my-2">
+          <div class="row mx-auto ">
+            <i class="mx-auto fas fa-trash icon-delete mx-1 my-auto"></i>
+            <h5 class="ml-4 my-auto">Удалить</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-9">
+      <app-advertisement-long-card *ngFor="let advertisement of advertisements" [advertisement]="advertisement"></app-advertisement-long-card>
+    </div>
+  </div>
 </div>

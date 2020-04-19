@@ -12,7 +12,6 @@ export class AdvertisementModel {
   comments?: unknown[];
   tags?: Array<TagModel>;
   creationTime: string;
-  address?: string;
   location?: LocationModel;
   price: number;
   images?: ImageModel[];

@@ -45,8 +45,8 @@ export class AuthenticationService {
       }));
   }
 
-  signup(email: string, firstName: string, lastName: string, phoneNumber: string, password: string, confirmPassword: string) {
-    return this.http.put<any>(`${environment.apiUrl}/User/signup`, { email, firstName, lastName, phoneNumber, password, confirmPassword })
+  signup(email: string, firstName: string, lastName: string, phoneNumber: string, password: string, confirmPassword: string, token: string) {
+    return this.http.put<any>(`${environment.apiUrl}/User/signup`, { email, firstName, lastName, phoneNumber, password, confirmPassword, token })
       .pipe(map(user => {
         // login successful if there's a jwt token in the response
         if (user && user.token) {

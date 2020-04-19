@@ -31,7 +31,7 @@
           <div *ngIf="f.password.errors.required">Введите пароль</div>
         </div>
         <small id="passwordHelpBlock" class="form-text text-muted">
-          Пароль должен содержать 6-20 символов
+          Пароль должен содержать 8-20 символов
         </small>
       </div>
       <div class="form-group">
@@ -45,6 +45,9 @@
                     formControlName="recaptchaReactive"
                     siteKey="{{getSiteKey()}}">
         </re-captcha>
+        <div *ngIf="submitted && !captcha" class="invalid-feedback">
+          <div *ngIf="f.recaptchaReactive.errors.required">Пройдите проверку reCaptcha</div>
+        </div>
       </div>
       <button [disabled]="loading" class="btn round btn-login shadow-sm">
         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>

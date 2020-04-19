@@ -12,12 +12,10 @@ import { AdvertisementCardComponent } from './components/advertisement-card/adve
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { AdminComponent } from './pages/admin/admin.component';
 import {JwtInterceptor} from './_helpers/jwt.interceptor';
 import {ErrorInterceptor} from './_helpers/error.interceptor';
 import {ReactiveFormsModule} from '@angular/forms';
 import { SearchComponent } from './pages/search/search.component';
-import { SearchCardComponent } from './components/search-card/search-card.component';
 import { EdititemComponent } from './pages/edititem/edititem.component';
 import { AdditemComponent } from './pages/additem/additem.component';
 import { CategoryChooserComponent } from './components/category-chooser/category-chooser.component';
@@ -40,6 +38,7 @@ import {NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgbModalBackdrop} from '@ng-bootstrap/ng-bootstrap/modal/modal-backdrop';
 import { CommentCardComponent } from './components/comment-card/comment-card.component';
 import { CommentBoxComponent } from './components/comment-box/comment-box.component';
+import { AdvertisementLongCardComponent } from './components/advertisement-long-card/advertisement-long-card.component';
 
 @NgModule({
   declarations: [
@@ -52,9 +51,7 @@ import { CommentBoxComponent } from './components/comment-box/comment-box.compon
     FooterComponent,
     HeaderComponent,
     ProfileComponent,
-    AdminComponent,
     SearchComponent,
-    SearchCardComponent,
     EdititemComponent,
     AdditemComponent,
     CategoryChooserComponent,
@@ -64,6 +61,7 @@ import { CommentBoxComponent } from './components/comment-box/comment-box.compon
     ErrorComponent,
     CommentCardComponent,
     CommentBoxComponent,
+    AdvertisementLongCardComponent,
   ],
     imports: [
         BrowserModule,
@@ -86,7 +84,6 @@ import { CommentBoxComponent } from './components/comment-box/comment-box.compon
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    // fakeBackendProvider
   ],
   bootstrap: [AppComponent],
 })

@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, FormsModule} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, FormsModule, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../services/authentication-service';
-import {AdvertisementModel} from "../../models/advertisement/advertisement-model";
-import {CategoryService} from "../../services/category-service";
-import {CategoryModel} from "../../models/category/category.model";
-import {Router} from "@angular/router";
-import {PictureService} from "../../services/picture.service";
+import {CategoryService} from '../../services/category-service';
+import {CategoryModel} from '../../models/category/category.model';
+import {Router} from '@angular/router';
+import {PictureService} from '../../services/picture.service';
 
 @Component({
   selector: 'app-header',
@@ -16,11 +15,12 @@ export class HeaderComponent implements OnInit {
 
   categories: CategoryModel[];
   searchForm: FormGroup;
-  constructor(private router: Router, private authService: AuthenticationService, private categoryService: CategoryService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router,
+              private authService: AuthenticationService, private categoryService: CategoryService) { }
 
   ngOnInit() {
-    this.searchForm = new FormGroup({
-      search: new FormControl()
+    this.searchForm = this.formBuilder.group({
+      search_text: ['', Validators.required],
     });
     this.categoryService.getCategories().subscribe(response => {
       this.categories = response;
@@ -38,6 +38,17 @@ export class HeaderComponent implements OnInit {
     } else {
       return 'Категория';
     }
+  }
+
+  get f() { return this.searchForm.controls; }
+
+  onSubmit() {
+    if (this.searchForm.invalid && this.searchForm.errors !== null) {
+      return;
+    }
+
+    const catId = this.categoryService.getCurrentCategory() ? this.categoryService.getCurrentCategory().id : 0;
+    this.router.navigate(['/search', catId, this.f.search_text.value]);
   }
 
   getAvatar() {

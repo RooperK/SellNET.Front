@@ -1,0 +1,19 @@
+.name {
+  font-size: 1.75rem;
+  font-weight: 500;
+}
+.button-profile {
+  padding: .5rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+  display: flex;
+}
+.button-edit-profile:hover {
+  background-color: #F2C94C;
+  color: white;
+}
+.button-delete-profile:hover {
+  background-color: #DB4437;
+  color: white;
+
+}

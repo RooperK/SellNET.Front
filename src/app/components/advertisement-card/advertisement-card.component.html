@@ -1,7 +1,9 @@
 <a [routerLink]="['/advert', advertisement.id]">
   <div class="card mb-3 shadow text-body">
-    <div class="image round">
-      <img class="image mb-2" src="{{getPictureSrc()}}" alt="" (error)="onErrorPicture()">
+    <div class="w-100 round">
+      <div class="image-container">
+        <img class="image mb-2" src="{{getPictureSrc()}}" alt="" (error)="onErrorPicture()">
+      </div>
       <div class="mx-3 my-2">
         <h5 class="card-title">{{advertisement.title}}</h5>
         <table class="no-border table_ad">

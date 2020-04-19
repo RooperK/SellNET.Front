@@ -4,9 +4,11 @@
 
 export const environment = {
   production: false,
-  // apiUrl: 'https://localhost:5001/api'
+  // apiUrl: 'https://localhost:5001/api',
   apiUrl: 'https://25.117.245.117:5001/api',
   pageSize: 20,
   siteKey: '6Ld-GukUAAAAALlVkq5BzvHMknJtms1tAXDYW5ln',
+  interceptTimeoutErr: true,
+
 };
 

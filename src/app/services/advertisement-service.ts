@@ -12,7 +12,6 @@ import {AuthenticationService} from "./authentication-service";
 })
 export class AdvertisementService {
 
-
   constructor(private http: HttpClient, private authService: AuthenticationService) {
   }
 
@@ -32,8 +31,15 @@ export class AdvertisementService {
     }
   }
 
+  searchAdvertisements(categoryId: number, word: string, page: number, size: number) {
+    return this.http.get(`${environment.apiUrl}/Heisenberg/search/${categoryId}/${word}/${page}/${size}`);
+  }
+
+  editAdvertisement(title: string, text: string, location: LocationModel, categoryId: number, images: ImageModel[], price: number, priceType: number) {
+    return this.http.put(`${environment.apiUrl}/Heisenberg/edit`, {title, text, location, categoryId, images, price, priceType});
+  }
+
   postAdvertisement(title: string, text: string, location: LocationModel, categoryId: number, images: ImageModel[], price: number, priceType: number) {
-    console.log('post');
     return this.http.put(`${environment.apiUrl}/Heisenberg/post`, {title, text, location, categoryId, images, price, priceType});
   }
 
