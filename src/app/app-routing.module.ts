@@ -6,12 +6,12 @@ import {LoginComponent} from './pages/login/login.component';
 import {SignupComponent} from './pages/signup/signup.component';
 import {ProfileComponent} from './pages/profile/profile.component';
 import {AuthGuard} from './_helpers/auth.guard';
-import {Role} from './models/role/role';
-import {AdditemComponent} from "./pages/additem/additem.component";
-import {EdititemComponent} from "./pages/edititem/edititem.component";
-import {DashboardFilteredComponent} from "./pages/dashboard-filtered/dashboard-filtered.component";
-import {ErrorComponent} from "./components/error/error.component";
-import {SearchComponent} from "./pages/search/search.component";
+import {AdditemComponent} from './pages/additem/additem.component';
+import {DashboardFilteredComponent} from './pages/dashboard-filtered/dashboard-filtered.component';
+import {ErrorComponent} from './components/error/error.component';
+import {HowtoComponent} from './pages/howto/howto.component';
+import {AboutComponent} from './pages/about/about.component';
+import {EditUserComponent} from "./components/edit-user/edit-user.component";
 
 
 const routes: Routes = [
@@ -23,6 +23,10 @@ const routes: Routes = [
   {
     path: 'error/:err',
     component: ErrorComponent
+  },
+  {
+    path: 'editprofile',
+    component: EditUserComponent
   },
   {
     path: 'filter/:id',
@@ -42,7 +46,15 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['RoleUser', 'RoleAdmin']}
+  },
+  {
+    path: 'profile/:id',
+    component: ProfileComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['RoleUser', 'RoleAdmin']}
   },
   {
     path: 'additem',
@@ -63,6 +75,14 @@ const routes: Routes = [
   {
     path: 'search/:id/:searchText',
     component: DashboardFilteredComponent,
+  },
+  {
+    path: 'howto',
+    component: HowtoComponent,
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
   },
   {
     path: '**',

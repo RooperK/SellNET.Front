@@ -9,6 +9,5 @@ export const environment = {
   pageSize: 20,
   siteKey: '6Ld-GukUAAAAALlVkq5BzvHMknJtms1tAXDYW5ln',
   interceptTimeoutErr: true,
-
 };
 

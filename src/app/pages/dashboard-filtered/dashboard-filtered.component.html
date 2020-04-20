@@ -1,5 +1,5 @@
 
-<div class="container">
+<div class="container" infiniteScroll (scrolled)="onScroll()">
   <div class="row">
     <div class="col-sm-3">
       <div class="">
@@ -10,15 +10,23 @@
 
     <div class="col-sm-9">
       <div class="row">
-        <div class="col-4" *ngFor="let advertisement of advertisements">
+        <div class="dash-col" *ngFor="let advertisement of advertisements">
           <app-advertisement-card [advertisement]="advertisement"></app-advertisement-card>
         </div>
       </div>
     </div>
   </div>
-
-
-
 </div>
 
+<div class="loading-container" *ngIf="loading">
+  <div class="loading">
+    <span class="spinner-border spinner-border-sm mr-1 spinner"></span>
+  </div>
+</div>
+
+<div class="loading-container" *ngIf="!loading && advertisements && advertisements.length === 0">
+  <div class="loading" style="color: #747474 !important;">
+    <h2>Объявлений еще нет... <a style="color: #747474 !important;" [routerLink]="['/additem']">Добавить?</a> </h2>
+  </div>
+</div>
 

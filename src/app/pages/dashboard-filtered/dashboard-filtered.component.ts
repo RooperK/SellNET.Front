@@ -12,19 +12,20 @@ import {AdvertisementPreviewModel} from '../../models/advertisement/advertisemen
 export class DashboardFilteredComponent implements OnInit {
 
   currentId: number;
-  page: number;
+  page = 1;
   searchText: string;
   advertisements: AdvertisementPreviewModel[];
+  loading: boolean;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private advertisementService: AdvertisementService) {
+    this.loading = true;
     router.events.subscribe((val) => {
       if (this.activatedRoute.snapshot.params.id !== this.currentId) {
         if (this.activatedRoute.snapshot.params.searchText) {
           this.searchText = this.activatedRoute.snapshot.params.searchText;
         }
         this.currentId = this.activatedRoute.snapshot.params.id;
-        this.page = 1;
-        this.getAdverts();
+        this.getAdverts(this.page);
       }
     });
   }
@@ -34,20 +35,31 @@ export class DashboardFilteredComponent implements OnInit {
     if (this.activatedRoute.snapshot.params.searchText) {
       this.searchText = this.activatedRoute.snapshot.params.searchText;
     }
-    this.page = 1;
     this.advertisements = [];
-    this.getAdverts();
+    this.getAdverts(this.page);
   }
 
-  getAdverts() {
+  getAdverts(page: number) {
     if (this.searchText) {
-      this.advertisementService.searchAdvertisements(this.currentId, this.searchText, this.page, environment.pageSize).subscribe(response => {
-        this.advertisements = response as AdvertisementPreviewModel[];
+      this.advertisementService.getAdvertisements(page, this.currentId, this.searchText).subscribe(response => {
+        for (const ad of response as AdvertisementPreviewModel[]) {
+          this.advertisements.push(ad);
+        }
+        this.loading = false;
+      });
+    } else {
+      this.advertisementService.getAdvertisements(page, this.currentId).subscribe(response => {
+        for (const ad of response as AdvertisementPreviewModel[]) {
+          this.advertisements.push(ad);
+        }
+        this.loading = false;
       });
     }
-    this.advertisementService.getAdvertisementByCategory(this.currentId, this.page, environment.pageSize).subscribe(response => {
-      this.advertisements = response;
-    });
   }
+
+  onScroll() {
+    this.getAdverts(++this.page);
+  }
+
 
 }

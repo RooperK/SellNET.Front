@@ -4,8 +4,8 @@
       <img src="assets/logo.svg" alt="">
     </a>
 
-    <form class="row search-box shadow-sm justify-content-center w-75" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-      <div class="category">
+    <form class="search-box shadow-sm" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+      <div class="category my-auto">
         <div class="dropdown show category-dropdown">
           <a class="btn no-border dropdown-toggle" href="#" role="button" id="categoryMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{this.getCurrentCategoryName()}}

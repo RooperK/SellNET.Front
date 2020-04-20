@@ -12,15 +12,28 @@ import {AdvertisementPreviewModel} from "../../models/advertisement/advertisemen
 export class DashboardComponent implements OnInit {
   advertisements: AdvertisementPreviewModel[];
   loading = true;
+  page = 1;
 
-  constructor(private advertisementService: AdvertisementService, private categoryService: CategoryService) { }
+  constructor(private advertisementService: AdvertisementService, private categoryService: CategoryService) {
+    this.advertisements = [];
+  }
 
   ngOnInit() {
     this.categoryService.setCurrentCategory(null);
-    this.advertisementService.getNewestAdvertisements(1).subscribe(response => {
-      this.advertisements = response;
+    this.getAds(this.page);
+  }
+
+  onScroll() {
+    this.getAds(++this.page);
+  }
+
+  getAds(page: number) {
+    this.advertisementService.getAdvertisements(page).subscribe(response => {
+      for (const ad of response as AdvertisementPreviewModel[]) {
+        this.advertisements.push(ad);
+      }
+
       this.loading = false;
     });
   }
-
 }

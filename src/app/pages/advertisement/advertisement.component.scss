@@ -13,13 +13,14 @@ h3 {
 
   width: 2rem;
   height: 2rem;
-  color:black;
+  color:black !important;
   padding: 0.4rem;
   border-radius: 100%;
 }
 .icon-edit:hover {
   background-color: #F2C94C;
-  color: white;
+  color: white !important;
+  text-decoration: none;
 }
 .icon-delete:hover {
   background-color: #DB4437;
@@ -81,4 +82,6 @@ h3 {
 }
 .user-card-name {
   margin: auto auto auto .8rem;
+  color: black !important;
 }
+

@@ -26,11 +26,12 @@ export class AdvertisementComponent implements OnInit {
   id: number;
   advertisement: AdvertisementModel;
   @ViewChild('carousel', {static : true}) carousel: NgbCarousel;
+  loading: boolean;
 
   constructor(private router: Router, private authService: AuthenticationService,
               private config: NgbCarouselConfig, private activatedRoute: ActivatedRoute,
               private advertisementService: AdvertisementService) {
-
+    this.loading = true;
   }
 
   ngOnInit() {
@@ -40,6 +41,7 @@ export class AdvertisementComponent implements OnInit {
       if (this.advertisement.images == null || this.advertisement.images.length === 0) {
         this.onErrorPicture();
       }
+      this.loading = false;
     });
     this.carousel.pause();
   }
@@ -69,7 +71,6 @@ export class AdvertisementComponent implements OnInit {
   }
 
   deleteItem() {
-    console.log('delete');
     this.advertisementService.deleteAdvertisement(this.advertisement.id).pipe(first()).subscribe(data => {
         this.router.navigate(['/']);
       },
@@ -78,8 +79,11 @@ export class AdvertisementComponent implements OnInit {
     });
   }
 
-  isCreator() {
-    return this.authService.isLogged() && (this.authService.isAdmin() ||
-      this.authService.currentUserValue.id === this.advertisement.user.id);
+  canDelete() {
+    return this.authService.canDelete(this.advertisement);
+  }
+
+  canEdit() {
+    return this.authService.canEdit(this.advertisement);
   }
 }

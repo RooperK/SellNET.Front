@@ -19,10 +19,10 @@
             <div class="row flex-row icon-container">
               <h3 class="mx-3 my-auto" style="color: #F2C94C">{{advertisement.price}} ₽</h3>
               <a [routerLink]="['/edititem', advertisement.id]">
-                <i class="fas fa-pencil-alt icon-edit mx-1 shadow-sm" *ngIf="isCreator()"></i>
+                <i class="fas fa-pencil-alt icon-edit mx-1 shadow-sm" *ngIf="canEdit()"></i>
               </a>
 
-              <a (click)="deleteItem()"><i class="fas fa-trash icon-delete mx-1 shadow-sm" *ngIf="isCreator()"></i></a>
+              <a (click)="deleteItem()"><i class="fas fa-trash icon-delete mx-1 shadow-sm" *ngIf="canDelete()"></i></a>
 
             </div>
           </div>
@@ -35,7 +35,7 @@
               </tr>
               <tr>
                 <td class="pr-1"><i class="fas fa-calendar-day main-color"></i></td>
-                <td class="px-1 sub-text">{{getDate(advertisement.creationTime)}}</td>
+                <td class="px-1 sub-text">{{getDate(advertisement.creationTime)}} <span class="ml-2" *ngIf="advertisement.lastEditTime" style="color: #747474">ред. {{getDate(advertisement.lastEditTime)}}</span> </td>
               </tr>
             </table>
           </div>
@@ -48,14 +48,21 @@
         </div>
 
         <div class="text-center w-100 row align-items-center">
-          <div class="py-2 px-4 row bg-white round shadow user-card ml-auto">
-            <img src="{{getAvatar()}}" class="avatar round" />
-            <h3 class="user-card-name">{{advertisement.user.firstName}}</h3>
-          </div>
+          <a [routerLink]="['/profile', advertisement.user.id]">
+            <div class="py-2 px-4 row bg-white round shadow user-card ml-auto">
+              <img src="{{getAvatar()}}" class="avatar round" />
+              <h3 class="user-card-name">{{advertisement.user.firstName}}</h3>
+            </div>
+          </a>
         </div>
       </div>
     </div>
   </div>
 
   <app-comment-box class="my-2" [advertisement]="advertisement"></app-comment-box>
+</div>
+<div class="loading-container" *ngIf="loading">
+  <div class="loading">
+    <span class="spinner-border spinner-border-sm mr-1 spinner"></span>
+  </div>
 </div>

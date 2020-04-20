@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Cloudinary} from '@cloudinary/angular-5.x';
 import {ImageModel} from '../../models/image/image.model';
 import {AdditemComponent} from '../../pages/additem/additem.component';
+import {EditUserComponent} from "../edit-user/edit-user.component";
 
 @Component({
   selector: 'app-image-upload',
@@ -19,6 +20,7 @@ export class ImageUploadComponent implements OnInit {
   private uploader: FileUploader;
   private title: string;
   @Input() addItemComponent: AdditemComponent;
+  @Input() editUserComponent: EditUserComponent;
 
   constructor(
     private cloudinary: Cloudinary,
@@ -31,10 +33,14 @@ export class ImageUploadComponent implements OnInit {
   }
 
   initImages(): void {
-    if (this.addItemComponent.advertisement.images) {
-      this.images = (this.addItemComponent.advertisement.images);
+    if (this.addItemComponent) {
+      if (this.addItemComponent.advertisement.images) {
+        this.images = (this.addItemComponent.advertisement.images);
+      }
+      this.addItemComponent.images = this.images;
+    } else if (this.editUserComponent) {
+      this.images.push(this.editUserComponent.user.avatar);
     }
-    this.addItemComponent.images = this.images;
 
   }
 
@@ -83,8 +89,15 @@ export class ImageUploadComponent implements OnInit {
 
     this.uploader.onCompleteItem = (item: any, response: string, status: number, headers: ParsedResponseHeaders) => {
       if (JSON.parse(response).resource_type === 'image') {
+        if (this.editUserComponent) {
+          this.images.pop();
+        }
         this.images.push({imageUrl: JSON.parse(response).public_id});
-        this.addItemComponent.images = this.images;
+        if (this.addItemComponent) {
+          this.addItemComponent.images = this.images;
+        } else if (this.editUserComponent) {
+          this.editUserComponent.image = this.images[0];
+        }
       }
       this.responses.pop();
     };

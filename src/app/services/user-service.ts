@@ -1,18 +1,20 @@
 import {environment} from '../../environments/environment';
-import {UserModel} from '../models/user/user.model';
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {ImageModel} from '../models/image/image.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
   constructor(private http: HttpClient) { }
 
-  getAll() {
-    return this.http.get<UserModel[]>(`${environment.apiUrl}/users`);
+
+  getUser(id: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/User/${id}`);
   }
 
-  getById(id: number) {
-    return this.http.get<UserModel>(`${environment.apiUrl}/users/${id}`);
+  editUser(firstName: string, lastName: string, avatar: ImageModel, phoneNumber: string): Observable<any> {
+    return this.http.put(`${environment.apiUrl}/User/edit`, {firstName, lastName, avatar, phoneNumber});
   }
 }
 

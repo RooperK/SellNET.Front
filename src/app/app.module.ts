@@ -15,7 +15,6 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import {JwtInterceptor} from './_helpers/jwt.interceptor';
 import {ErrorInterceptor} from './_helpers/error.interceptor';
 import {ReactiveFormsModule} from '@angular/forms';
-import { SearchComponent } from './pages/search/search.component';
 import { EdititemComponent } from './pages/edititem/edititem.component';
 import { AdditemComponent } from './pages/additem/additem.component';
 import { CategoryChooserComponent } from './components/category-chooser/category-chooser.component';
@@ -32,13 +31,16 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {AutosizeModule} from 'ngx-autosize';
 import {FileUploadModule} from 'ng2-file-upload';
-import {NgxDadataModule} from "@kolkov/ngx-dadata";
+import {NgxDadataModule} from '@kolkov/ngx-dadata';
 import { ErrorComponent } from './components/error/error.component';
 import {NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
-import {NgbModalBackdrop} from '@ng-bootstrap/ng-bootstrap/modal/modal-backdrop';
 import { CommentCardComponent } from './components/comment-card/comment-card.component';
 import { CommentBoxComponent } from './components/comment-box/comment-box.component';
 import { AdvertisementLongCardComponent } from './components/advertisement-long-card/advertisement-long-card.component';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+import { HowtoComponent } from './pages/howto/howto.component';
+import { AboutComponent } from './pages/about/about.component';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,6 @@ import { AdvertisementLongCardComponent } from './components/advertisement-long-
     FooterComponent,
     HeaderComponent,
     ProfileComponent,
-    SearchComponent,
     EdititemComponent,
     AdditemComponent,
     CategoryChooserComponent,
@@ -62,6 +63,9 @@ import { AdvertisementLongCardComponent } from './components/advertisement-long-
     CommentCardComponent,
     CommentBoxComponent,
     AdvertisementLongCardComponent,
+    HowtoComponent,
+    AboutComponent,
+    EditUserComponent,
   ],
     imports: [
         BrowserModule,
@@ -80,6 +84,7 @@ import { AdvertisementLongCardComponent } from './components/advertisement-long-
         FileUploadModule,
         NgxDadataModule,
         NgbCarouselModule,
+      InfiniteScrollModule
     ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
