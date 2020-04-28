@@ -1,5 +1,5 @@
 import {Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpUrlEncodingCodec} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {UserModel} from '../models/user/user.model';
@@ -56,23 +56,14 @@ export class AuthenticationService {
   }
 
   confirm(userId: string, confirmCode: string) {
+    confirmCode = encodeURIComponent(confirmCode);
     return this.http.get(`${environment.apiUrl}/User/confirm/userId=${userId}/confirmCode=${confirmCode}`);
   }
 
   signup(email: string, firstName: string, lastName: string, phoneNumber: string, password: string, confirmPassword: string, token: string) {
     const returnUrl = `${environment.url}/confirm/`;
-    return this.http.put<any>(`${environment.apiUrl}/User/signup`, { email, firstName, lastName, phoneNumber, password, confirmPassword, token, returnUrl })
-      .pipe(map(user => {
-        if (user && user.token) {
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUserSubject.next(user);
-        }
-
-        return user;
-      }));
+    return this.http.put<any>(`${environment.apiUrl}/User/signup`, { email, firstName, lastName, phoneNumber, password, confirmPassword, token, returnUrl });
   }
-
-
 
   logout() {
     localStorage.removeItem('currentUser');
@@ -96,5 +87,14 @@ export class AuthenticationService {
       this.currentUserSubject.value.lastName = userRef.lastName;
       this.currentUserSubject.value.avatar = userRef.avatar;
     });
+  }
+
+  reset(id: string, resetCode: string, password: string, confirmPassword: string) {
+    return this.http.put<any>(`${environment.apiUrl}/User/reset`, { id, password, confirmPassword, resetCode});
+  }
+
+  sendRestore(email: string) {
+    const returnUrl = `${environment.url}/reset/`;
+    return this.http.get(`${environment.apiUrl}/User/sendRestore/email=${email}/returnUrl=${encodeURIComponent(returnUrl)}`);
   }
 }

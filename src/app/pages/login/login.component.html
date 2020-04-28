@@ -18,6 +18,9 @@
         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
         Войти
       </button>
+      <div class="my-3" >
+        <a [routerLink]="['/getrestore']" style="color: #747474">Забыли пароль?</a>
+      </div>
       <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
 
 

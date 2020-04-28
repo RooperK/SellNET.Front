@@ -20,10 +20,8 @@ export class SignupComponent implements OnInit {
   captcha: string;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private authenticationService: AuthenticationService
+    private formBuilder: FormBuilder, private route: ActivatedRoute,
+    private router: Router, private authenticationService: AuthenticationService
   ) {
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);

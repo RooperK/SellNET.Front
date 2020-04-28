@@ -45,6 +45,7 @@ import { AfterSignUpComponent } from './pages/after-sign-up/after-sign-up.compon
 import { ConfirmComponent } from './pages/confirm/confirm.component';
 import { RestoreComponent } from './pages/restore/restore.component';
 import { AfterRestoreComponent } from './pages/after-restore/after-restore.component';
+import { GetrestoreComponent } from './pages/getrestore/getrestore.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { AfterRestoreComponent } from './pages/after-restore/after-restore.compo
     ConfirmComponent,
     RestoreComponent,
     AfterRestoreComponent,
+    GetrestoreComponent,
   ],
     imports: [
         BrowserModule,

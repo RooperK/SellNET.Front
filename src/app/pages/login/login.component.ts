@@ -16,12 +16,8 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
   error = '';
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private authenticationService: AuthenticationService
-  ) {
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute,
+              private router: Router, private authenticationService: AuthenticationService) {
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);
     }

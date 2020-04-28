@@ -16,6 +16,7 @@ import {AfterSignUpComponent} from "./pages/after-sign-up/after-sign-up.componen
 import {RestoreComponent} from "./pages/restore/restore.component";
 import {AfterRestoreComponent} from "./pages/after-restore/after-restore.component";
 import {ConfirmComponent} from "./pages/confirm/confirm.component";
+import {GetrestoreComponent} from "./pages/getrestore/getrestore.component";
 
 
 const routes: Routes = [
@@ -37,8 +38,12 @@ const routes: Routes = [
     component: AfterSignUpComponent
   },
   {
-    path: 'restore',
+    path: 'reset/:userId/:resetCode',
     component: RestoreComponent
+  },
+  {
+    path: 'getrestore',
+    component: GetrestoreComponent
   },
   {
     path: 'afterrestore',
