@@ -16,8 +16,8 @@ export class ImageUploadComponent implements OnInit {
   responses: Array<any>;
 
   images: ImageModel[];
-  private hasBaseDropZoneOver = false;
-  private uploader: FileUploader;
+   hasBaseDropZoneOver = false;
+   uploader: FileUploader;
   private title: string;
   @Input() addItemComponent: AdditemComponent;
   @Input() editUserComponent: EditUserComponent;
@@ -33,13 +33,15 @@ export class ImageUploadComponent implements OnInit {
   }
 
   initImages(): void {
+    console.log (this.editUserComponent);
     if (this.addItemComponent) {
       if (this.addItemComponent.advertisement.images) {
         this.images = (this.addItemComponent.advertisement.images);
       }
       this.addItemComponent.images = this.images;
     } else if (this.editUserComponent) {
-      this.images.push(this.editUserComponent.user.avatar);
+      console.log(this.editUserComponent.userA.avatar);
+      this.images.push(this.editUserComponent.userA.avatar);
     }
 
   }

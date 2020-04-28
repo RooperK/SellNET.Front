@@ -54,4 +54,8 @@ export class CommentBoxComponent implements OnInit {
   addComment() {
     return this.commentsService.addComment(this.advertisement.id, this.f.item_text.value);
   }
+
+  isLogged() {
+    return this.authService.isLogged();
+  }
 }

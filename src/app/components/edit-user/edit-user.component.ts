@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthenticationService} from "../../services/authentication-service";
@@ -7,6 +7,7 @@ import {environment} from "../../../environments/environment";
 import {UserService} from "../../services/user-service";
 import {ImageModel} from "../../models/image/image.model";
 import {UserModel} from "../../models/user/user.model";
+import {ImageUploadComponent} from "../image-upload/image-upload.component";
 
 @Component({
   selector: 'app-edit-user',
@@ -20,6 +21,9 @@ export class EditUserComponent implements OnInit {
   submitted = false;
   error = '';
   image: ImageModel;
+  userA: UserModel;
+  @ViewChild('imageUploadComponent', {static: true}) imageUploadComponent: ImageUploadComponent;
+
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute,
               private router: Router, private authenticationService: AuthenticationService,
@@ -32,6 +36,7 @@ export class EditUserComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userA = this.authenticationService.currentUserValue;
     this.signupForm = this.formBuilder.group({
       name: ['', Validators.required],
       surname: ['', Validators.required],
@@ -43,7 +48,11 @@ export class EditUserComponent implements OnInit {
       this.f.name.setValue(this.user.firstName);
       this.f.surname.setValue(this.user.lastName);
       this.f.phone.setValue(this.user.phoneNumber);
+      this.imageUploadComponent.initImages();
+
     });
+
+
   }
 
   get f() { return this.signupForm.controls; }

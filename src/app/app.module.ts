@@ -41,6 +41,10 @@ import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import { HowtoComponent } from './pages/howto/howto.component';
 import { AboutComponent } from './pages/about/about.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
+import { AfterSignUpComponent } from './pages/after-sign-up/after-sign-up.component';
+import { ConfirmComponent } from './pages/confirm/confirm.component';
+import { RestoreComponent } from './pages/restore/restore.component';
+import { AfterRestoreComponent } from './pages/after-restore/after-restore.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +70,10 @@ import { EditUserComponent } from './components/edit-user/edit-user.component';
     HowtoComponent,
     AboutComponent,
     EditUserComponent,
+    AfterSignUpComponent,
+    ConfirmComponent,
+    RestoreComponent,
+    AfterRestoreComponent,
   ],
     imports: [
         BrowserModule,

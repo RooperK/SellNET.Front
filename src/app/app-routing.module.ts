@@ -12,6 +12,10 @@ import {ErrorComponent} from './components/error/error.component';
 import {HowtoComponent} from './pages/howto/howto.component';
 import {AboutComponent} from './pages/about/about.component';
 import {EditUserComponent} from "./components/edit-user/edit-user.component";
+import {AfterSignUpComponent} from "./pages/after-sign-up/after-sign-up.component";
+import {RestoreComponent} from "./pages/restore/restore.component";
+import {AfterRestoreComponent} from "./pages/after-restore/after-restore.component";
+import {ConfirmComponent} from "./pages/confirm/confirm.component";
 
 
 const routes: Routes = [
@@ -27,6 +31,22 @@ const routes: Routes = [
   {
     path: 'editprofile',
     component: EditUserComponent
+  },
+  {
+    path: 'aftersignup',
+    component: AfterSignUpComponent
+  },
+  {
+    path: 'restore',
+    component: RestoreComponent
+  },
+  {
+    path: 'afterrestore',
+    component: AfterRestoreComponent
+  },
+  {
+    path: 'confirm/:userId/:confirmCode',
+    component: ConfirmComponent
   },
   {
     path: 'filter/:id',

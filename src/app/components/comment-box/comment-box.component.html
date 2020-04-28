@@ -1,4 +1,4 @@
-<div class="card round shadow p-3 my-2" *ngIf="authService.isLogged()">
+<div class="card round shadow p-3 my-2" *ngIf="isLogged()">
   <form [formGroup]="commentFormGroup" (ngSubmit)="onSubmit()">
     <div class="row mx-4 justify-content-center">
       <img class="avatar" src="{{getAvatar()}}" />

@@ -8,7 +8,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class ErrorComponent implements OnInit {
 
-  private error: string;
+  error: string;
 
   constructor(private activatedRoute: ActivatedRoute) { }
 

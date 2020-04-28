@@ -5,6 +5,7 @@ import {CategoryService} from '../../services/category-service';
 import {CategoryModel} from '../../models/category/category.model';
 import {Router} from '@angular/router';
 import {PictureService} from '../../services/picture.service';
+import {UserModel} from "../../models/user/user.model";
 
 @Component({
   selector: 'app-header',
@@ -15,6 +16,7 @@ export class HeaderComponent implements OnInit {
 
   categories: CategoryModel[];
   searchForm: FormGroup;
+  currentUser: UserModel;
   constructor(private formBuilder: FormBuilder, private router: Router,
               private authService: AuthenticationService, private categoryService: CategoryService) { }
 
@@ -25,6 +27,9 @@ export class HeaderComponent implements OnInit {
     this.categoryService.getCategories().subscribe(response => {
       this.categories = response;
     });
+    if (this.authService.currentUserValue) {
+      this.currentUser = this.authService.currentUserValue;
+    }
   }
 
   setCurrentCategory(category: CategoryModel) {
@@ -49,6 +54,14 @@ export class HeaderComponent implements OnInit {
 
     const catId = this.categoryService.getCurrentCategory() ? this.categoryService.getCurrentCategory().id : 0;
     this.router.navigate(['/search', catId, this.f.search_text.value]);
+  }
+
+  logout() {
+    this.authService.logout();
+  }
+
+  isLogged() {
+    return this.authService.isLogged();
   }
 
   getAvatar() {

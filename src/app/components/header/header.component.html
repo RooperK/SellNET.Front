@@ -25,25 +25,25 @@
 
     </form>
 
-    <div class="log-box shadow-sm" *ngIf="!authService.isLogged()">
+    <div class="log-box shadow-sm" *ngIf="!isLogged()">
       <a [routerLink]="'/login'"><button class="btn">Вход</button></a>
       <a [routerLink]="'/signup'"><button class="btn reg-btn shadow-sm">Регистрация</button></a>
     </div>
 
-    <div class="log-box shadow-sm" *ngIf="authService.isLogged()">
+    <div class="log-box shadow-sm" *ngIf="isLogged()">
       <div class="profile-box">
         <div class="dropdown show round">
           <a class="btn no-border dropdown-toggle" href="#" role="button" id="profileBox" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img src="{{getAvatar()}}" class="avatar mr-2" />
             <span class="my-auto">
-              {{authService.currentUserValue.firstName}}
+              {{currentUser.firstName}}
             </span>
           </a>
 
           <div class="dropdown-menu dropdown-menu-right round" aria-labelledby="profileBox">
             <a class="dropdown-item color-di" [routerLink]="'/profile'">Мой профиль</a>
             <a class="dropdown-item color-di" [routerLink]="'/additem'">Добавить объявление</a>
-            <a class="dropdown-item color-di" (click)="authService.logout()">Выйти</a>
+            <a class="dropdown-item color-di" (click)="logout()">Выйти</a>
           </div>
         </div>
       </div>

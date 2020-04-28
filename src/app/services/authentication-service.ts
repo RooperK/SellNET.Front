@@ -55,8 +55,13 @@ export class AuthenticationService {
       }));
   }
 
+  confirm(userId: string, confirmCode: string) {
+    return this.http.get(`${environment.apiUrl}/User/confirm/userId=${userId}/confirmCode=${confirmCode}`);
+  }
+
   signup(email: string, firstName: string, lastName: string, phoneNumber: string, password: string, confirmPassword: string, token: string) {
-    return this.http.put<any>(`${environment.apiUrl}/User/signup`, { email, firstName, lastName, phoneNumber, password, confirmPassword, token })
+    const returnUrl = `${environment.url}/confirm/`;
+    return this.http.put<any>(`${environment.apiUrl}/User/signup`, { email, firstName, lastName, phoneNumber, password, confirmPassword, token, returnUrl })
       .pipe(map(user => {
         if (user && user.token) {
           localStorage.setItem('currentUser', JSON.stringify(user));
