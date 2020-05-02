@@ -34,6 +34,18 @@ export class LoginComponent implements OnInit {
 
   get f() { return this.loginForm.controls; }
 
+  loginGoogle() {
+    this.authenticationService.loginGoogle();
+  }
+
+  loginFacebook() {
+    this.authenticationService.loginFacebook();
+  }
+
+  loginVk() {
+    this.authenticationService.loginVk();
+  }
+
   onSubmit() {
     this.submitted = true;
 
@@ -53,4 +65,5 @@ export class LoginComponent implements OnInit {
           this.loading = false;
         });
   }
+
 }

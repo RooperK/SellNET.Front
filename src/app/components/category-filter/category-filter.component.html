@@ -12,7 +12,7 @@
 
       </mat-tree-node>
       <!-- This is the tree node template for expandable nodes -->
-      <mat-tree-node class="tree" *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding matTreeNodePaddingIndent="10">
+      <mat-tree-node class="tree" *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding matTreeNodePaddingIndent="5">
         <button mat-icon-button matTreeNodeToggle
                 [attr.aria-label]="'toggle ' + node.name">
           <mat-icon class="tree mat-icon-rtl-mirror">

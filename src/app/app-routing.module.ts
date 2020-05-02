@@ -17,6 +17,7 @@ import {RestoreComponent} from "./pages/restore/restore.component";
 import {AfterRestoreComponent} from "./pages/after-restore/after-restore.component";
 import {ConfirmComponent} from "./pages/confirm/confirm.component";
 import {GetrestoreComponent} from "./pages/getrestore/getrestore.component";
+import {SocialcallbackComponent} from "./components/socialcallback/socialcallback.component";
 
 
 const routes: Routes = [
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'aftersignup',
     component: AfterSignUpComponent
+  },
+  {
+    path: 'oauthcallback/:provider',
+    component: SocialcallbackComponent
   },
   {
     path: 'reset/:userId/:resetCode',

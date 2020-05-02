@@ -4,7 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import {Cloudinary} from '@cloudinary/angular-5.x';
 import {ImageModel} from '../../models/image/image.model';
 import {AdditemComponent} from '../../pages/additem/additem.component';
-import {EditUserComponent} from "../edit-user/edit-user.component";
+import {EditUserComponent} from '../edit-user/edit-user.component';
+import {PictureService} from '../../services/picture.service';
 
 @Component({
   selector: 'app-image-upload',
@@ -40,8 +41,9 @@ export class ImageUploadComponent implements OnInit {
       }
       this.addItemComponent.images = this.images;
     } else if (this.editUserComponent) {
-      console.log(this.editUserComponent.userA.avatar);
-      this.images.push(this.editUserComponent.userA.avatar);
+      if (this.editUserComponent.userA.avatar.imageUrl) {
+        this.images.push(this.editUserComponent.userA.avatar);
+      }
     }
 
   }

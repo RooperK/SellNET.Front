@@ -46,6 +46,28 @@ import { ConfirmComponent } from './pages/confirm/confirm.component';
 import { RestoreComponent } from './pages/restore/restore.component';
 import { AfterRestoreComponent } from './pages/after-restore/after-restore.component';
 import { GetrestoreComponent } from './pages/getrestore/getrestore.component';
+import {AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider, SocialLoginModule} from 'angularx-social-login-vk';
+import {environment} from '../environments/environment';
+import {VKLoginProvider} from 'angularx-social-login-vk';
+import { SocialcallbackComponent } from './components/socialcallback/socialcallback.component';
+
+const socialAuthConfig = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider(`${environment.googleClientId}`)
+  },
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider(`${environment.facebookClientId}`)
+  },
+  {
+    id: VKLoginProvider.PROVIDER_ID,
+    provider: new VKLoginProvider(`${environment.vkClientId}`),
+  }
+]);
+export function provideConfig() {
+  return socialAuthConfig;
+}
 
 @NgModule({
   declarations: [
@@ -76,6 +98,7 @@ import { GetrestoreComponent } from './pages/getrestore/getrestore.component';
     RestoreComponent,
     AfterRestoreComponent,
     GetrestoreComponent,
+    SocialcallbackComponent,
   ],
     imports: [
         BrowserModule,
@@ -94,9 +117,11 @@ import { GetrestoreComponent } from './pages/getrestore/getrestore.component';
         FileUploadModule,
         NgxDadataModule,
         NgbCarouselModule,
-      InfiniteScrollModule
+      InfiniteScrollModule,
+      SocialLoginModule
     ],
   providers: [
+    { provide: AuthServiceConfig, useFactory: provideConfig},
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],

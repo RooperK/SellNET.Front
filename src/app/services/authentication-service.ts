@@ -1,24 +1,28 @@
 import {Router} from '@angular/router';
-import {HttpClient, HttpUrlEncodingCodec} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {HttpClient, HttpParams, HttpUrlEncodingCodec} from '@angular/common/http';
+import {Injectable, Renderer2, RendererFactory2} from '@angular/core';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import {UserModel} from '../models/user/user.model';
 import {environment} from '../../environments/environment';
-import {map} from 'rxjs/operators';
-import {Role} from "../models/role/role";
-import {AdvertisementModel} from "../models/advertisement/advertisement-model";
-import {AdvertisementPreviewModel} from "../models/advertisement/advertisement-preview.model";
-import {UserService} from "./user-service";
+import {catchError, finalize, map} from 'rxjs/operators';
+import {Role} from '../models/role/role';
+import {AdvertisementModel} from '../models/advertisement/advertisement-model';
+import {UserService} from './user-service';
+import {AuthService, FacebookLoginProvider, GoogleLoginProvider, SocialUser} from 'angularx-social-login-vk';
+import {VKLoginProvider} from 'angularx-social-login-vk';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
   private readonly tokenName = '  login_session';
   private currentUserSubject: BehaviorSubject<UserModel>;
+  private renderer: Renderer2;
   public currentUser: Observable<UserModel>;
 
-  constructor(private http: HttpClient, private userService: UserService) {
+  constructor(private http: HttpClient, private userService: UserService,
+              private rendererFactory: RendererFactory2, private router: Router) {
     this.currentUserSubject = new BehaviorSubject<UserModel>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
+    this.renderer = rendererFactory.createRenderer(null, null);
   }
 
   public get currentUserValue(): UserModel {
@@ -96,5 +100,42 @@ export class AuthenticationService {
   sendRestore(email: string) {
     const returnUrl = `${environment.url}/reset/`;
     return this.http.get(`${environment.apiUrl}/User/sendRestore/email=${email}/returnUrl=${encodeURIComponent(returnUrl)}`);
+  }
+
+  loginVk() {
+    this.openPopUp(`https://oauth.vk.com/authorize?client_id=${environment.vkClientId}&display=page&redirect_uri=${environment.url}/oauthcallback/vk&scope=email&response_type=code&v=5.103`);
+  }
+
+  loginGoogle() {
+
+  }
+
+  loginFacebook() {
+    this.openPopUp(`https://www.facebook.com/v6.0/dialog/oauth?client_id=${environment.facebookClientId}&redirect_uri=${environment.url}/oauthcallback/fb&state=sellnet`);
+  }
+
+  private openPopUp(url: string) {
+    const width = 700;
+    const height = 300;
+    const left = (screen.width / 2) - (width / 2);
+    const top = (screen.height / 2) - (height / 2);
+    const windowOptions = `menubar=no,location=no,resizable=no,scrollbars=no,status=no, width=${width}, height=${height}, top=${top}, left=${left}`;
+    const type = 'auth';
+
+    window.open(url, type, windowOptions);
+
+  }
+
+  socialSignInToApi(code: string, provider: string) {
+    this.http.post<any>(`${environment.apiUrl}/User/sociallogin`,
+      { redirectURI: `${environment.url}/oauthcallback/${provider}`, provider, code})
+      .subscribe(user => {
+        if (user && user.token) {
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.currentUserSubject.next(user);
+        }
+        window.close();
+        opener.location.reload();
+    });
   }
 }

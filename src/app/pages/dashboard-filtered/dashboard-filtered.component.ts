@@ -20,24 +20,19 @@ export class DashboardFilteredComponent implements OnInit {
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private advertisementService: AdvertisementService) {
     this.loading = true;
     router.events.subscribe((val) => {
-      if (this.activatedRoute.snapshot.params.id !== this.currentId) {
+      if (this.activatedRoute.snapshot.params.id !== this.currentId || this.activatedRoute.snapshot.params.searchText !== this.searchText) {
         if (this.activatedRoute.snapshot.params.searchText) {
           this.searchText = this.activatedRoute.snapshot.params.searchText;
         }
         this.currentId = this.activatedRoute.snapshot.params.id;
+        this.advertisements = [];
+        this.page = 1;
         this.getAdverts(this.page);
       }
     });
   }
 
-  ngOnInit() {
-    this.currentId = this.activatedRoute.snapshot.params.id;
-    if (this.activatedRoute.snapshot.params.searchText) {
-      this.searchText = this.activatedRoute.snapshot.params.searchText;
-    }
-    this.advertisements = [];
-    this.getAdverts(this.page);
-  }
+  ngOnInit() {}
 
   getAdverts(page: number) {
     if (this.searchText) {
