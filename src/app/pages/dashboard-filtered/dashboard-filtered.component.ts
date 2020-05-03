@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AdvertisementService} from '../../services/advertisement-service';
-import {environment} from '../../../environments/environment';
 import {AdvertisementPreviewModel} from '../../models/advertisement/advertisement-preview.model';
 
 @Component({
@@ -55,6 +54,4 @@ export class DashboardFilteredComponent implements OnInit {
   onScroll() {
     this.getAdverts(++this.page);
   }
-
-
 }

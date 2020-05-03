@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CommentModel} from "../../models/comment/comment.model";
-import {PictureService} from "../../services/picture.service";
-import {InfoService} from "../../services/info.service";
+import {CommentModel} from '../../models/comment/comment.model';
+import {PictureService} from '../../services/picture.service';
+import {InfoService} from '../../services/info.service';
 
 @Component({
   selector: 'app-comment-card',

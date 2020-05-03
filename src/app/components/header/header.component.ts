@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, FormsModule, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../services/authentication-service';
 import {CategoryService} from '../../services/category-service';
 import {CategoryModel} from '../../models/category/category.model';
 import {Router} from '@angular/router';
 import {PictureService} from '../../services/picture.service';
-import {UserModel} from "../../models/user/user.model";
+import {UserModel} from '../../models/user/user.model';
 
 @Component({
   selector: 'app-header',

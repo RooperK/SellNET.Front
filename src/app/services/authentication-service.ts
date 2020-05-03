@@ -1,15 +1,13 @@
 import {Router} from '@angular/router';
-import {HttpClient, HttpParams, HttpUrlEncodingCodec} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Injectable, Renderer2, RendererFactory2} from '@angular/core';
-import {BehaviorSubject, Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {UserModel} from '../models/user/user.model';
 import {environment} from '../../environments/environment';
-import {catchError, finalize, map} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {Role} from '../models/role/role';
 import {AdvertisementModel} from '../models/advertisement/advertisement-model';
 import {UserService} from './user-service';
-import {AuthService, FacebookLoginProvider, GoogleLoginProvider, SocialUser} from 'angularx-social-login-vk';
-import {VKLoginProvider} from 'angularx-social-login-vk';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -33,7 +31,6 @@ export class AuthenticationService {
     return this.currentUserValue.roles[0];
   }
 
-
   getSession(): string {
     return sessionStorage.getItem(this.tokenName);
   }
@@ -54,7 +51,6 @@ export class AuthenticationService {
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
         }
-
         return user;
       }));
   }
@@ -64,9 +60,11 @@ export class AuthenticationService {
     return this.http.get(`${environment.apiUrl}/User/confirm/userId=${userId}/confirmCode=${confirmCode}`);
   }
 
-  signup(email: string, firstName: string, lastName: string, phoneNumber: string, password: string, confirmPassword: string, token: string) {
+  signup(email: string, firstName: string, lastName: string, phoneNumber: string,
+         password: string, confirmPassword: string, token: string) {
     const returnUrl = `${environment.url}/confirm/`;
-    return this.http.put<any>(`${environment.apiUrl}/User/signup`, { email, firstName, lastName, phoneNumber, password, confirmPassword, token, returnUrl });
+    return this.http.put<any>(`${environment.apiUrl}/User/signup`,
+      { email, firstName, lastName, phoneNumber, password, confirmPassword, token, returnUrl });
   }
 
   logout() {
@@ -103,27 +101,25 @@ export class AuthenticationService {
   }
 
   loginVk() {
-    this.openPopUp(`https://oauth.vk.com/authorize?client_id=${environment.vkClientId}&display=page&redirect_uri=${environment.url}/oauthcallback/vk&scope=email&response_type=code&v=5.103`);
+    this.openPopUp(200, `https://oauth.vk.com/authorize?client_id=${environment.vkClientId}&display=page&redirect_uri=${environment.url}/oauthcallback/vk&response_type=code&v=5.103`);
   }
 
   loginGoogle() {
-
+    this.openPopUp(500, `https://accounts.google.com/o/oauth2/v2/auth?client_id=${environment.googleClientId}&redirect_uri=${environment.url}/oauthcallback/g&response_type=code&scope=https://www.googleapis.com/auth/userinfo.profile`);
   }
 
   loginFacebook() {
-    this.openPopUp(`https://www.facebook.com/v6.0/dialog/oauth?client_id=${environment.facebookClientId}&redirect_uri=${environment.url}/oauthcallback/fb&state=sellnet`);
+    this.openPopUp(500, `https://www.facebook.com/v6.0/dialog/oauth?client_id=${environment.facebookClientId}&redirect_uri=${environment.url}/oauthcallback/fb&state=sellnet`);
   }
 
-  private openPopUp(url: string) {
-    const width = 700;
-    const height = 300;
+  private openPopUp(height: number, url: string) {
+    const width = 640;
     const left = (screen.width / 2) - (width / 2);
     const top = (screen.height / 2) - (height / 2);
     const windowOptions = `menubar=no,location=no,resizable=no,scrollbars=no,status=no, width=${width}, height=${height}, top=${top}, left=${left}`;
     const type = 'auth';
 
     window.open(url, type, windowOptions);
-
   }
 
   socialSignInToApi(code: string, provider: string) {

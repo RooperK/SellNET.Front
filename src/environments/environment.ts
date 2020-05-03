@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://25.77.174.210:5001/api',
-  url: 'https://25.77.174.210',
+  apiUrl: 'https://78.30.211.84:5001/api',
+  url: 'https://25.77.174.210.xip.io',
   // apiUrl: 'https://25.117.245.117:5001/api',
   pageSize: 20,
   siteKey: '6Ld-GukUAAAAALlVkq5BzvHMknJtms1tAXDYW5ln',
@@ -13,6 +13,5 @@ export const environment = {
   googleClientId: '180431379874-bb87s6kkm7okndg9sbinql6pabeoglom.apps.googleusercontent.com',
   facebookClientId: '586130835343143',
   vkClientId: '7442192'
-
 };
 

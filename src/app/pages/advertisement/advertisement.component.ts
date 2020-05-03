@@ -3,18 +3,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AdvertisementService} from '../../services/advertisement-service';
 import {AdvertisementModel} from '../../models/advertisement/advertisement-model';
 import {ImageModel} from '../../models/image/image.model';
-import {
-  ModalDismissReasons,
-  NgbActiveModal,
-  NgbCarousel,
-  NgbCarouselConfig,
-  NgbModal
-} from '@ng-bootstrap/ng-bootstrap';
-import {UserService} from "../../services/user-service";
-import {AuthenticationService} from "../../services/authentication-service";
-import {first} from "rxjs/operators";
-import {InfoService} from "../../services/info.service";
-import {PictureService} from "../../services/picture.service";
+import {NgbCarousel, NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
+import {AuthenticationService} from '../../services/authentication-service';
+import {first} from 'rxjs/operators';
+import {InfoService} from '../../services/info.service';
+import {PictureService} from '../../services/picture.service';
 
 @Component({
   selector: 'app-advertisement',
@@ -67,7 +60,7 @@ export class AdvertisementComponent implements OnInit {
   }
 
   getAvatar() {
-    return PictureService.getAvatarSrc(this.advertisement.user.avatar)
+    return PictureService.getAvatarSrc(this.advertisement.user.avatar);
   }
 
   deleteItem() {

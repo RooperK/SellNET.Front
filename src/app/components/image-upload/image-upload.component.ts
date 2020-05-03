@@ -5,7 +5,6 @@ import {Cloudinary} from '@cloudinary/angular-5.x';
 import {ImageModel} from '../../models/image/image.model';
 import {AdditemComponent} from '../../pages/additem/additem.component';
 import {EditUserComponent} from '../edit-user/edit-user.component';
-import {PictureService} from '../../services/picture.service';
 
 @Component({
   selector: 'app-image-upload',
@@ -15,18 +14,16 @@ import {PictureService} from '../../services/picture.service';
 export class ImageUploadComponent implements OnInit {
   @Input()
   responses: Array<any>;
-
   images: ImageModel[];
    hasBaseDropZoneOver = false;
    uploader: FileUploader;
-  private title: string;
+  private readonly title: string;
   @Input() addItemComponent: AdditemComponent;
   @Input() editUserComponent: EditUserComponent;
 
   constructor(
     private cloudinary: Cloudinary,
-    private zone: NgZone,
-    private http: HttpClient
+    private zone: NgZone
   ) {
     this.responses = [];
     this.title = '';
@@ -34,7 +31,6 @@ export class ImageUploadComponent implements OnInit {
   }
 
   initImages(): void {
-    console.log (this.editUserComponent);
     if (this.addItemComponent) {
       if (this.addItemComponent.advertisement.images) {
         this.images = (this.addItemComponent.advertisement.images);

@@ -24,5 +24,4 @@ export class ErrorComponent implements OnInit {
         return 'Ведутся технические работы.';
     }
   }
-
 }

@@ -11,14 +11,13 @@ import {DashboardFilteredComponent} from './pages/dashboard-filtered/dashboard-f
 import {ErrorComponent} from './components/error/error.component';
 import {HowtoComponent} from './pages/howto/howto.component';
 import {AboutComponent} from './pages/about/about.component';
-import {EditUserComponent} from "./components/edit-user/edit-user.component";
-import {AfterSignUpComponent} from "./pages/after-sign-up/after-sign-up.component";
-import {RestoreComponent} from "./pages/restore/restore.component";
-import {AfterRestoreComponent} from "./pages/after-restore/after-restore.component";
-import {ConfirmComponent} from "./pages/confirm/confirm.component";
-import {GetrestoreComponent} from "./pages/getrestore/getrestore.component";
-import {SocialcallbackComponent} from "./components/socialcallback/socialcallback.component";
-
+import {EditUserComponent} from './components/edit-user/edit-user.component';
+import {AfterSignUpComponent} from './pages/after-sign-up/after-sign-up.component';
+import {RestoreComponent} from './pages/restore/restore.component';
+import {AfterRestoreComponent} from './pages/after-restore/after-restore.component';
+import {ConfirmComponent} from './pages/confirm/confirm.component';
+import {GetrestoreComponent} from './pages/getrestore/getrestore.component';
+import {SocialcallbackComponent} from './components/socialcallback/socialcallback.component';
 
 const routes: Routes = [
 

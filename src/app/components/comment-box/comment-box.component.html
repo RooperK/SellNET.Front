@@ -2,10 +2,7 @@
   <form [formGroup]="commentFormGroup" (ngSubmit)="onSubmit()">
     <div class="row mx-4 justify-content-center">
       <img class="avatar" src="{{getAvatar()}}" />
-
       <textarea formControlName="item_text" class="form-control round shadow no-border text-comment-area mx-3" rows="2" placeholder="Введите комментарий" autosize></textarea>
-
-
       <button class="round btn-send shadow no-border" [disabled]="loading" >
         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
         <i *ngIf="!loading" class="fas fa-paper-plane icon-send"></i>

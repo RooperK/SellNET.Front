@@ -25,7 +25,7 @@ export class CategoryFilterComponent implements OnInit {
     });
   }
 
-  private _transformer = (node: CategoryModel, level: number) => {
+  private transformer = (node: CategoryModel, level: number) => {
     return {
       expandable: !!node.subCategories && node.subCategories.length > 0,
       name: node.name,
@@ -38,7 +38,7 @@ export class CategoryFilterComponent implements OnInit {
     node => node.level, node => node.expandable);
 
   treeFlattener = new MatTreeFlattener(
-    this._transformer, node => node.level, node => node.expandable, node => node.subCategories);
+    this.transformer, node => node.level, node => node.expandable, node => node.subCategories);
 
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
@@ -48,7 +48,6 @@ export class CategoryFilterComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   hasChild = (_: number, node: FlatNode) => node.expandable;

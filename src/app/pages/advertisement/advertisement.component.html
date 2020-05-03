@@ -21,9 +21,7 @@
               <a [routerLink]="['/edititem', advertisement.id]">
                 <i class="fas fa-pencil-alt icon-edit mx-1 shadow-sm" *ngIf="canEdit()"></i>
               </a>
-
               <a (click)="deleteItem()"><i class="fas fa-trash icon-delete mx-1 shadow-sm" *ngIf="canDelete()"></i></a>
-
             </div>
           </div>
 
@@ -43,8 +41,6 @@
           <div class="row my-4">
             <p class="main-text">{{advertisement.text}}</p>
           </div>
-
-
         </div>
 
         <div class="text-center w-100 row align-items-center">
@@ -61,6 +57,7 @@
 
   <app-comment-box class="my-2" [advertisement]="advertisement"></app-comment-box>
 </div>
+
 <div class="loading-container" *ngIf="loading">
   <div class="loading">
     <span class="spinner-border spinner-border-sm mr-1 spinner"></span>

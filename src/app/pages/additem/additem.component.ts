@@ -43,7 +43,6 @@ export class AdditemComponent implements OnInit {
     this.currentLocation = {country: addressData.country, region: addressData.region_with_type, city: addressData.city, street: addressData.street_with_type};
   }
 
-
   constructor(private router: Router, private authService: AuthenticationService,
               private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder,
               private advertisementService: AdvertisementService) { }
@@ -76,7 +75,6 @@ export class AdditemComponent implements OnInit {
       item_address: ['', Validators.required],
       item_category: ['', Validators.required]
     });
-
   }
 
   get f() { return this.addItemFormGroup.controls; }
@@ -97,7 +95,7 @@ export class AdditemComponent implements OnInit {
     }
     if (this.addressSelected === false) {
       this.f.item_address.setErrors({error: true});
-      this.error = 'Введите адрес';
+      this.error = 'Выберите адрес из списка';
       return;
     }
 
@@ -128,7 +126,5 @@ export class AdditemComponent implements OnInit {
             this.loading = false;
           });
     }
-
   }
-
 }

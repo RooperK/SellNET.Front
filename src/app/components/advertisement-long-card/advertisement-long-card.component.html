@@ -7,7 +7,7 @@
       <table class="no-border table_ad">
         <tr>
           <td class="pr-1"><i class="fas fa-map-marker-alt main-color"></i></td>
-          <td class="px-1 sub-text">{{advertisement.location.city}}</td>
+          <td class="px-1 sub-text">{{advertisement.location.city || advertisement.location.region || advertisement.location.country}}</td>
         </tr>
         <tr>
           <td class="pr-1"><i class="fas fa-calendar-day main-color"></i></td>

@@ -32,7 +32,6 @@ export class DashboardComponent implements OnInit {
       for (const ad of response as AdvertisementPreviewModel[]) {
         this.advertisements.push(ad);
       }
-
       this.loading = false;
     });
   }

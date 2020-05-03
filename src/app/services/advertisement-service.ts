@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {LocationModel} from '../models/location/location.model';
@@ -37,13 +37,16 @@ export class AdvertisementService {
     }
   }
 
-
-  editAdvertisement(title: string, text: string, location: LocationModel, categoryId: number, images: ImageModel[], price: number, type: number) {
-    return this.http.put(`${environment.apiUrl}/Heisenberg/edit`, {title, text, location, categoryId, images, price, type});
+  editAdvertisement(title: string, text: string, location: LocationModel, categoryId: number,
+                    images: ImageModel[], price: number, type: number) {
+    return this.http.put(`${environment.apiUrl}/Heisenberg/edit`,
+      {title, text, location, categoryId, images, price, type});
   }
 
-  postAdvertisement(title: string, text: string, location: LocationModel, categoryId: number, images: ImageModel[], price: number, type: number) {
-    return this.http.put(`${environment.apiUrl}/Heisenberg/post`, {title, text, location, categoryId, images, price, type});
+  postAdvertisement(title: string, text: string, location: LocationModel, categoryId: number,
+                    images: ImageModel[], price: number, type: number) {
+    return this.http.put(`${environment.apiUrl}/Heisenberg/post`,
+      {title, text, location, categoryId, images, price, type});
   }
 
   getAdvertisementByUser(page: number, user: number): Observable<any> {

@@ -1,12 +1,10 @@
 <div *ngFor="let categoryLevel of categoryLevels">
   <div class="main-category shadow-sm round">
     <div class="main-category">
-
       <div class="dropdown show round  bg-white">
         <a class="btn no-border dropdown-toggle" href="#" role="button" id="main-category" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           {{categoryLevel.currentCategory.name}}
         </a>
-
         <div class="dropdown-menu round" aria-labelledby="main-category">
           <a class="dropdown-item color-di" (click)="setCategory(categoryLevel, category)" *ngFor="let category of categoryLevel.categories">{{category.name}}</a>
         </div>

@@ -1,13 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AdvertisementComponent} from "../../pages/advertisement/advertisement.component";
-import {PictureService} from "../../services/picture.service";
-import {AdvertisementModel} from "../../models/advertisement/advertisement-model";
-import {AdvertisementPreviewModel} from "../../models/advertisement/advertisement-preview.model";
-import {InfoService} from "../../services/info.service";
-import {AuthenticationService} from "../../services/authentication-service";
-import {first} from "rxjs/operators";
-import {AdvertisementService} from "../../services/advertisement-service";
-import {Router} from "@angular/router";
+import {PictureService} from '../../services/picture.service';
+import {AdvertisementPreviewModel} from '../../models/advertisement/advertisement-preview.model';
+import {InfoService} from '../../services/info.service';
+import {AuthenticationService} from '../../services/authentication-service';
+import {first} from 'rxjs/operators';
+import {AdvertisementService} from '../../services/advertisement-service';
 
 @Component({
   selector: 'app-advertisement-long-card',
@@ -41,6 +38,7 @@ export class AdvertisementLongCardComponent implements OnInit {
   canEdit() {
     return this.isCurrUserProfilePage;
   }
+
   canDelete() {
     return this.isCurrUserProfilePage || this.authService.isAdmin();
   }

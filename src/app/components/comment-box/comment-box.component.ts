@@ -1,11 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AdvertisementComponent} from "../../pages/advertisement/advertisement.component";
-import {AdvertisementModel} from "../../models/advertisement/advertisement-model";
-import {AuthenticationService} from "../../services/authentication-service";
-import {PictureService} from "../../services/picture.service";
-import {CommentsService} from "../../services/comments.service";
-import {CommentModel} from "../../models/comment/comment.model";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AdvertisementModel} from '../../models/advertisement/advertisement-model';
+import {AuthenticationService} from '../../services/authentication-service';
+import {PictureService} from '../../services/picture.service';
+import {CommentsService} from '../../services/comments.service';
+import {CommentModel} from '../../models/comment/comment.model';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-comment-box',
@@ -44,7 +43,6 @@ export class CommentBoxComponent implements OnInit {
   onSubmit() {
     this.loading = true;
     this.addComment().subscribe(resp => {
-      console.log(resp);
       this.loading = false;
       this.getComments();
       this.f.item_text.setValue('');

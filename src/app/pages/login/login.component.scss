@@ -5,25 +5,29 @@
   align-items: center;
   flex: 1;
 }
-
 .input {
   padding-left: 20px;
   width: 350px;
 }
-
 .btn-login {
   background-color: #F2C94C;
   padding-left: 15px;
   padding-right: 15px;
   font-size: 1.2em;
-  font-weight: bold;
+  font-weight: 500;
   color: white;
 }
-
+.btn-reg {
+  background-color: #ffffff;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 1.2em;
+  font-weight: 500;
+  color: #000000;
+}
 .line {
   background-color: #9b51e0;
 }
-
 .btn-circle {
   width: 45px;
   height: 45px;
@@ -33,34 +37,9 @@
   text-align: center;
   margin: 0 7px;
 }
-
-
-
 .header {
   text-align: center;
   margin: 15px;
   color: #9b51e0;
   font-weight: bold;
-}
-
-.form-login {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 400px;
-  padding: 15px;
-  input {
-
-    &.ng-invalid.ng-touched {
-      border-color: red;
-    }
-    position: relative;
-    &[type='password'] {
-      margin-top: 8px;
-    }
-    &:focus {
-      z-index: 1;
-    }
-  }
 }

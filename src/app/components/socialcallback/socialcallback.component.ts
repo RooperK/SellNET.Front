@@ -1,6 +1,6 @@
-import {Component, HostListener, OnInit} from '@angular/core';
-import {AuthenticationService} from "../../services/authentication-service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {AuthenticationService} from '../../services/authentication-service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-socialcallback',
@@ -9,8 +9,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class SocialcallbackComponent implements OnInit {
 
-  constructor(private authService: AuthenticationService, private activatedRoute: ActivatedRoute,
-              private router: Router) { }
+  constructor(private authService: AuthenticationService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     if (this.activatedRoute.snapshot.queryParams.code && this.activatedRoute.snapshot.params.provider) {

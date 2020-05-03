@@ -31,10 +31,10 @@
         </div>
       </div>
     </div>
-    <div class="col-9">
+    <div class="col-9" *ngIf="!loading && advertisements && advertisements.length !== 0">
       <app-advertisement-long-card *ngFor="let advertisement of advertisements" [advertisement]="advertisement" [isCurrUserProfilePage]="isCurrent()"></app-advertisement-long-card>
     </div>
-    <div class="col-9 loading-container" *ngIf="!loading && advertisements && advertisements.length === 0">
+    <div class="col-9" *ngIf="!loading && advertisements && advertisements.length === 0">
       <div class="loading" style="color: #747474 !important;">
         <h2>Объявлений еще нет... <a *ngIf="isCurrent()" style="color: #747474 !important;" [routerLink]="['/additem']">Добавить?</a> </h2>
       </div>

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {LocationModel} from "../models/location/location.model";
+import {LocationModel} from '../models/location/location.model';
 
 @Injectable({ providedIn: 'root' })
 export class InfoService {

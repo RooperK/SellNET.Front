@@ -23,7 +23,7 @@
 
     <ngx-dadata id="item_address" class="search my-2" placeholder="Введите адрес" formControlName="item_address" [config]="config" (selected)="onAddressSelected($event)"></ngx-dadata>
     <div *ngIf="submitted && f.item_address.errors" class="invalid-feedback">
-      <div *ngIf="f.item_address.errors.required">Введите адрес</div>
+      <div *ngIf="f.item_address.errors.error">Выберите адрес из списка</div>
     </div>
 
 

@@ -18,19 +18,13 @@
       <div class="form-group">
         <input id="phone" type="text" mask="(000) 000-00-00" prefix="+7 " [showMaskTyped]="true" placeHolderCharacter="_"  placeholder="Номер телефона" formControlName="phone" class="form-control round input shadow-sm" />
       </div>
-
       <app-image-upload #imageUploadComponent [editUserComponent]="this"></app-image-upload>
       <button [disabled]="loading" class="btn round btn-login shadow-sm">
         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
         Изменить
       </button>
       <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
-
-
     </form>
-
-
-
   </div>
 </div>
 

@@ -16,8 +16,7 @@ export class CategoryChooserComponent implements OnInit {
 
   @Input() addItemComponent: AdditemComponent;
 
-  constructor(private categoryService: CategoryService) {
-  }
+  constructor(private categoryService: CategoryService) {}
 
   ngOnInit() {
     this.categoryLevels = [];
@@ -45,8 +44,7 @@ export class CategoryChooserComponent implements OnInit {
 
       this.categoryLevels.push({currentCategory: category.subCategories[0], categories: category.subCategories});
     }
-    console.log(this.categoryLevels[length].currentCategory.id);
-    this.addItemComponent.currentCategoryId = this.categoryLevels[length].currentCategory.id;
+    this.addItemComponent.currentCategoryId = this.categoryLevels[this.categoryLevels.length - 1].currentCategory.id;
   }
 
 }

@@ -14,36 +14,32 @@
           <div *ngIf="f.password.errors.required">Введите пароль</div>
         </div>
       </div>
-      <button [disabled]="loading" class="btn round btn-login shadow-sm">
-        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-        Войти
-      </button>
       <div class="my-3" >
         <a [routerLink]="['/getrestore']" style="color: #747474">Забыли пароль?</a>
       </div>
+      <div>
+        <button [disabled]="loading" class="btn round btn-login shadow-sm mr-2">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Войти
+        </button>
+      </div>
       <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
-
-
     </form>
     <div class="text-center m-3">
       <hr class="m-3 line" />
       войти через социальные сети
     </div>
-
-    <div >
+    <div>
       <button class="vk btn-circle no-border shadow-sm" (click)="loginVk()">
         <i class="fab fa-vk"></i>
       </button>
-      <button class="g btn-circle no-border shadow-sm btn-off" (click)="loginGoogle()">
+      <button class="g btn-circle no-border shadow-sm" (click)="loginGoogle()">
         <i class="fab fa-google"></i>
       </button>
       <button class="fb btn-circle no-border shadow-sm" (click)="loginFacebook()">
         <i class="fab fa-facebook-f"></i>
       </button>
-
     </div>
-
-
   </div>
 </div>
 

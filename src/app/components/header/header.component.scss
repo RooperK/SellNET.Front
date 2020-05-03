@@ -19,56 +19,42 @@
 .avatar {
   height: 2.25rem;
 }
-
 .search-box {
   padding: 2px 2px 2px 10px;
   background-color: white;
   border-radius: 20px;
   display: flex;
   width: 60%;
-  //justify-content: normal;
 }
-
 .log-box {
   padding: 2px 2px 2px 2px;
   background-color: white;
   border-radius: 20px;
   display: flex;
 }
-
 .category-dropdown {
   border-right-color: #9b51e0;
   border-right-width: 1px;
 }
-
 .user-dropdown {
   float: right;
 }
-
 .color-di:hover {
   background-color: #9b51e0;
   background-image: none;
   color: white;
   border-radius: 10px;
 }
-
 .submit-search-btn {
   background: #F2C94C;
   border-radius: 20px;
 }
-
 .reg-btn {
   color: white;
   background: #F2C94C;
   border-radius: 20px 20px 20px 0;
 }
-
 @media only screen and (max-width: 1000px) {
-  .search-box {
-    width: 50%;
-  }
-}
-@media only screen and (max-width: 850px) {
   .search-box {
     width: 50%;
   }

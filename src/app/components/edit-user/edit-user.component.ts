@@ -1,13 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {AuthenticationService} from "../../services/authentication-service";
-import {first} from "rxjs/operators";
-import {environment} from "../../../environments/environment";
-import {UserService} from "../../services/user-service";
-import {ImageModel} from "../../models/image/image.model";
-import {UserModel} from "../../models/user/user.model";
-import {ImageUploadComponent} from "../image-upload/image-upload.component";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AuthenticationService} from '../../services/authentication-service';
+import {first} from 'rxjs/operators';
+import {UserService} from '../../services/user-service';
+import {ImageModel} from '../../models/image/image.model';
+import {UserModel} from '../../models/user/user.model';
+import {ImageUploadComponent} from '../image-upload/image-upload.component';
 
 @Component({
   selector: 'app-edit-user',
@@ -23,7 +22,6 @@ export class EditUserComponent implements OnInit {
   image: ImageModel;
   userA: UserModel;
   @ViewChild('imageUploadComponent', {static: true}) imageUploadComponent: ImageUploadComponent;
-
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute,
               private router: Router, private authenticationService: AuthenticationService,
@@ -49,10 +47,7 @@ export class EditUserComponent implements OnInit {
       this.f.surname.setValue(this.user.lastName);
       this.f.phone.setValue(this.user.phoneNumber);
       this.imageUploadComponent.initImages();
-
     });
-
-
   }
 
   get f() { return this.signupForm.controls; }
@@ -74,7 +69,6 @@ export class EditUserComponent implements OnInit {
         error => {
           this.error = error;
           this.loading = false;
-        });
+    });
   }
-
 }

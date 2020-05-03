@@ -15,7 +15,6 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import {JwtInterceptor} from './_helpers/jwt.interceptor';
 import {ErrorInterceptor} from './_helpers/error.interceptor';
 import {ReactiveFormsModule} from '@angular/forms';
-import { EdititemComponent } from './pages/edititem/edititem.component';
 import { AdditemComponent } from './pages/additem/additem.component';
 import { CategoryChooserComponent } from './components/category-chooser/category-chooser.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
@@ -80,7 +79,6 @@ export function provideConfig() {
     FooterComponent,
     HeaderComponent,
     ProfileComponent,
-    EdititemComponent,
     AdditemComponent,
     CategoryChooserComponent,
     ImageUploadComponent,
